@@ -4,7 +4,7 @@ import Link from "next/link"
 const Footer = () => {
   return (
     <footer className="border-t">
-      <div className="flex justify-between p-6 px-10 shadow-sm max-w-7xl lg:mx-auto w-full">
+      <div className="space-y-4 sm:space-y-0 sm:flex sm:justify-between  py-6 px-10 shadow-sm max-w-7xl lg:mx-auto w-full">
         <Link href='/'>
           <Image 
             src="/logo.svg"
@@ -14,7 +14,9 @@ const Footer = () => {
           />
         </Link>
 
-        <p>2024 Salaah Sathi. All Rights reserved.</p>
+        <p className="">
+          2024 Salaah Sathi. All Rights reserved.
+        </p>
       </div>
     </footer>
   )
