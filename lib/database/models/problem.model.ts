@@ -17,22 +17,7 @@ export interface IProblem extends Document {
   _id: string;
   title: string;
   description?: string;
-  category:
-    | "Education"
-    | "Health"
-    | "Career"
-    | "Technology"
-    | "Personal Finance"
-    | "Legal"
-    | "Housing"
-    | "Transportation"
-    | "Environment"
-    | "Social Issues"
-    | "Government Services"
-    | "Consumer Rights"
-    | "Relationships"
-    | "Personal Development"
-    | "Other";
+  category: string;
   user: { _id: string; username: string };
   comments: IComment[];
   createdAt: Date;
@@ -45,23 +30,6 @@ const ProblemSchema: Schema<IProblem> = new Schema({
   category: {
     type: String,
     required: true,
-    enum: [
-      "Education",
-      "Health",
-      "Career",
-      "Technology",
-      "Personal Finance",
-      "Legal",
-      "Housing",
-      "Transportation",
-      "Environment",
-      "Social Issues",
-      "Government Services",
-      "Consumer Rights",
-      "Relationships",
-      "Personal Development",
-      "Other",
-    ],
   },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   comments: { type: [CommentSchema], default: [] },

@@ -9,7 +9,7 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const Header = () => {
   return (
-    <header className="flex justify-between p-6 px-10 shadow-sm fixed top-0 z-10 max-w-7xl lg:mx-auto w-full">
+    <header className="flex justify-between p-6 px-5 sm:px-10 shadow-sm fixed top-0 z-10 max-w-7xl lg:mx-auto w-full bg-white">
       <div className="flex gap-10 items-center">
         <Link href={'/'} className="cursor-pointer">
           <Image src={"/logo.svg"} alt="logo" width={150} height={150} />
