@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateProblemParams } from "@/types";
+import { CreateProblemParams, GetAllProblemParams } from "@/types";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import User from "../database/models/user.model";
@@ -61,6 +61,30 @@ export const getProblemById = async (problemId: string) => {
     }
 
     return JSON.parse(JSON.stringify(problem));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// read problem
+export const getAllProblems = async ({ query, limit = 6, page, category }: GetAllProblemParams) => {
+  try {
+    await connectToDatabase();
+
+    const conditions = {};
+
+    const problemsQuery = Problem.find(conditions)
+      .sort({ createdAt: "desc"})
+      .skip(0)
+      .limit(limit);
+
+    const problems = await populateProblem(problemsQuery)
+    const problemsCount = await Problem.countDocuments(conditions);
+
+    return {
+      data: JSON.parse(JSON.stringify(problems)),
+      totalPages: Math.ceil(problemsCount / limit)
+    }
   } catch (error) {
     handleError(error);
   }

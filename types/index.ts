@@ -68,3 +68,11 @@ export type CreateCommentParams = {
   path: string;
 }
 
+// get all problems
+export type GetAllProblemParams = {
+  query: string;
+  category: string;
+  limit: number;
+  page: number;
+}
+

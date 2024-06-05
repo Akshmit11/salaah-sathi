@@ -1,13 +1,31 @@
 import Ad from "@/components/shared/Ad";
-import { Button } from "@/components/ui/button";
+import Collection from "@/components/shared/Collection";
+import { getAllProblems } from "@/lib/actions/problem.actions";
 
-export default function Home() {
+export default async function Home() {
+
+  const problems = await getAllProblems({
+    query: "",
+    category: "",
+    page: 1,
+    limit: 6
+  });
+
   return (
-    <main>
+    <main className="px-4 sm:px-0">
       <Ad />
-      <div>
-        HomePage
+      <div className="mb-4">
+        Search and Filter
       </div>
+      <Collection
+        data={problems?.data}
+        emptyTitle={"No Problems Found"}
+        emptySubtitle={"Come back later"}
+        limit={6}
+        page={1}
+        totalPages={2}
+        collectionType={"All_Problems"}
+      />
     </main>
   );
 }
