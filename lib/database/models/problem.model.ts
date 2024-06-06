@@ -16,7 +16,7 @@ const CommentSchema: Schema<IComment> = new Schema({
 export interface IProblem extends Document {
   _id: string;
   title: string;
-  description?: string;
+  description: string;
   category: string;
   user: { _id: string; username: string };
   comments: IComment[];

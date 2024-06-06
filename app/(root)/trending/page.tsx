@@ -21,7 +21,7 @@ const TrendingProblemPage = async () => {
         limit={6}
         page={1}
         totalPages={2}
-        collectionType={"Saved_Problems"}
+        collectionType={"Trending_Problems"}
       />
     </main>
   );

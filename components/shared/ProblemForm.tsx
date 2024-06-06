@@ -20,18 +20,34 @@ import Dropdown from "./Dropdown";
 import { useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { useRouter } from "next/navigation";
-import { createProblem } from "@/lib/actions/problem.actions";
+import { createProblem, updateProblem } from "@/lib/actions/problem.actions";
+import { IProblem } from "@/lib/database/models/problem.model";
 
 type PropertyFormProps = {
   userId: string;
   type: "Upload" | "Update";
+  problem?: IProblem;
+  problemId?: string;
 };
 
-const ProblemForm = ({ userId, type }: PropertyFormProps) => {
+const ProblemForm = ({
+  userId,
+  type,
+  problem,
+  problemId,
+}: PropertyFormProps) => {
   const categories = categoryEnum.Enum;
   const router = useRouter();
 
-  const initialValues = ProblemFormDefaultValues;
+  const initialValues =
+    problem && type === "Update"
+      ? {
+          title: problem.title,
+          description: problem.description,
+          category: problem.category as (typeof ProblemFormDefaultValues.category)
+        }
+      : ProblemFormDefaultValues;
+
   const [selectedCategory, setSelectedCategory] = useState(
     ProblemFormDefaultValues.category
   );
@@ -49,14 +65,36 @@ const ProblemForm = ({ userId, type }: PropertyFormProps) => {
         const newProblem = await createProblem({
           problem: values,
           userId,
-          path: "/profile"
-        })
+          path: "/profile",
+        });
         if (newProblem) {
           form.reset();
           router.push(`/problems/${newProblem._id}`);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
+      }
+    }
+    // console.log(values)
+    if (type === "Update") {
+
+      if(!problemId) {
+        router.back();
+        return;
+      }
+      try {
+        const updatedProblem = await updateProblem({
+          userId,
+          problem: { ...values, _id: problemId },
+          path: `/problems/${problemId}`,
+        });
+        
+        if (updatedProblem) {
+          form.reset();
+          router.push(`/problems/${updatedProblem._id}`);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
   }
@@ -90,6 +128,8 @@ const ProblemForm = ({ userId, type }: PropertyFormProps) => {
                     onChangeHandler={field.onChange}
                     value={field.value}
                     categories={categories}
+                    defaultValue={initialValues.category}
+                    update={type === "Update" ? true : false}
                   />
                 </FormControl>
                 <FormMessage />
@@ -122,7 +162,9 @@ const ProblemForm = ({ userId, type }: PropertyFormProps) => {
           className="sm:w-fit sm:flex sm:self-end"
           disabled={form.formState.isSubmitting}
         >
-          {form.formState.isSubmitting ? `Processing...` : `${type === "Upload" ? `Submit` : `Edit`} Problem`}
+          {form.formState.isSubmitting
+            ? `Processing...`
+            : `${type === "Upload" ? `Submit` : `Edit`} Problem`}
         </Button>
       </form>
     </Form>

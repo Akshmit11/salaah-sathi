@@ -97,3 +97,28 @@ export type GetTrendingProblemParams = {
   limit: number;
   page: number;
 }
+
+// delete problem
+export type DeleteProblemParams = {
+  problemId: string;
+  path: string;
+}
+
+// delete saved problem
+export type deleteSavedProblemParams = {
+  problemId: string;
+  path: string;
+  currentUserId?: string;
+}
+
+// update problem
+export type UpdateProblemParams = {
+  userId: string;
+  problem: {
+    _id: string;
+    title: string;
+    description: string;
+    category: string;
+  };
+  path: string;
+}

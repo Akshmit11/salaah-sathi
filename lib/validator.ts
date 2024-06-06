@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-const categoryEnum = [
+export const categoryEnum = [
   "Education",
   "Health",
   "Career",

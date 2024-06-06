@@ -5,7 +5,10 @@ import {
   GetAllProblemParams,
   GetMyProblemParams,
   GetSavedProblemParams,
-  GetTrendingProblemParams
+  GetTrendingProblemParams,
+  DeleteProblemParams,
+  deleteSavedProblemParams,
+  UpdateProblemParams,
 } from "@/types";
 import { revalidatePath } from "next/cache";
 import Problem from "../database/models/problem.model";
@@ -76,7 +79,7 @@ export const getProblemById = async (problemId: string) => {
   }
 };
 
-// read problem
+// read problem - r
 export const getAllProblems = async ({
   query,
   limit = 6,
@@ -100,6 +103,36 @@ export const getAllProblems = async ({
       data: JSON.parse(JSON.stringify(problems)),
       totalPages: Math.ceil(problemsCount / limit),
     };
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// update problem
+export const updateProblem = async ({
+  userId,
+  problem,
+  path,
+}: UpdateProblemParams) => {
+  try {
+    await connectToDatabase();
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not present");
+    }
+    console.log(problem)
+
+    const updatedProblem = await Problem.findByIdAndUpdate(
+      problem._id,
+      problem,
+      { new: true }
+    );
+
+    if (!updatedProblem) {
+      throw new Error("Problem not found");
+    }
+    revalidatePath(path);
+    return JSON.parse(JSON.stringify(updatedProblem));
   } catch (error) {
     handleError(error);
   }
@@ -193,6 +226,60 @@ export const getAllTrendingProblems = async ({
       data: JSON.parse(JSON.stringify(problems)),
       totalPages: Math.ceil(problemsCount / limit),
     };
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// delete problem - d
+export const deleteProblem = async ({
+  problemId,
+  path,
+}: DeleteProblemParams) => {
+  try {
+    await connectToDatabase();
+
+    const deleteProblem = await Problem.findByIdAndDelete(problemId);
+
+    if (deleteProblem) {
+      await User.updateMany(
+        { saveProblems: problemId },
+        { $pull: { saveProblems: problemId } }
+      );
+      await User.findByIdAndUpdate(deleteProblem.user, {
+        $inc: { total_problems: -1 },
+      });
+      revalidatePath(path);
+    }
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// delete Save problem
+export const deleteSavedProblem = async ({
+  problemId,
+  path,
+  currentUserId,
+}: deleteSavedProblemParams) => {
+  try {
+    await connectToDatabase();
+    const problem = await Problem.findByIdAndUpdate(
+      problemId,
+      { $inc: { timesSaved: -1 } },
+      { new: true }
+    );
+    if (!problem) throw new Error("Problem does not exists");
+
+    const user = await User.findByIdAndUpdate(
+      currentUserId,
+      { $pull: { saveProblems: problemId } },
+      { new: true }
+    );
+    if (!user) throw new Error("User does not exist");
+
+    // Optionally revalidate the path if needed
+    revalidatePath(path);
   } catch (error) {
     handleError(error);
   }

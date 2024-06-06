@@ -11,11 +11,13 @@ type DropdownProps = {
   value?: string;
   onChangeHandler?: () => void;
   categories: typeof categoryEnum.Enum;
+  defaultValue?: string;
+  update?: boolean
 };
 
-const Dropdown = ({ value, onChangeHandler, categories }: DropdownProps) => {
+const Dropdown = ({ value, onChangeHandler, categories, defaultValue, update }: DropdownProps) => {
   return (
-    <Select onValueChange={onChangeHandler} required>
+    <Select onValueChange={onChangeHandler} required defaultValue={update ? defaultValue : undefined}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Type of Problem" />
       </SelectTrigger>

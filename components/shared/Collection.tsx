@@ -9,6 +9,7 @@ type CollectionProps = {
   page: number | string;
   totalPages?: number;
   urlParamName?: string;
+  currentUserId?: string;
   collectionType: "All_Problems" | "My_Problems" | "Saved_Problems" | "Trending_Problems";
 };
 
@@ -20,6 +21,7 @@ const Collection = ({
   page,
   totalPages = 0,
   urlParamName,
+  currentUserId,
   collectionType,
 }: CollectionProps) => {
   return (
@@ -30,7 +32,7 @@ const Collection = ({
             {data.map((problem) => {
               return (
                 <li key={problem._id}>
-                  <Card problem={problem} />
+                  <Card problem={problem} collectionType={collectionType} currentUserId={currentUserId} />
                 </li>
               );
             })}

@@ -34,6 +34,7 @@ const SaveProblemsPage = async () => {
         limit={6}
         page={1}
         totalPages={2}
+        currentUserId={currentUser._id}
         collectionType={"Saved_Problems"}
       />
     </main>
