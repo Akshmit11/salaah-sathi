@@ -2,10 +2,11 @@ import Ad from "@/components/shared/Ad";
 import Collection from "@/components/shared/Collection";
 import { getAllSavedProblems } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
+import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-const SaveProblemsPage = async () => {
+const SaveProblemsPage = async ({ searchParams }: SearchParamProps) => {
   const { userId } = auth();
   if (!userId) {
     redirect("/sign-in");
@@ -17,9 +18,10 @@ const SaveProblemsPage = async () => {
     redirect("/");
   }
 
+  const page = Number(searchParams?.page) || 1;
   const problems = await getAllSavedProblems({
     userId: currentUser._id,
-    page: 1,
+    page,
     limit: 6,
   });
 
@@ -32,8 +34,8 @@ const SaveProblemsPage = async () => {
         emptyTitle={"You haved no saved problems"}
         emptySubtitle={"Save one if you find it interesting"}
         limit={6}
-        page={1}
-        totalPages={2}
+        page={page}
+        totalPages={problems?.totalPages}
         currentUserId={currentUser._id}
         collectionType={"Saved_Problems"}
       />

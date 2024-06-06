@@ -30,8 +30,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
         emptyTitle={"No Problems Found"}
         emptySubtitle={"Come back later"}
         limit={6}
-        page={1}
-        totalPages={2}
+        page={page}
+        totalPages={problems?.totalPages}
         collectionType={"All_Problems"}
       />
     </main>

@@ -1,5 +1,6 @@
 import { IProblem } from "@/lib/database/models/problem.model";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 type CollectionProps = {
   data: IProblem[];
@@ -31,19 +32,28 @@ const Collection = ({
   return (
     <>
       {data.length > 0 ? (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data.map((problem) => {
-            return (
-              <div key={problem._id}>
-                <Card
-                  problem={problem}
-                  collectionType={collectionType}
-                  currentUserId={currentUserId}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {data.map((problem) => {
+              return (
+                <div key={problem._id}>
+                  <Card
+                    problem={problem}
+                    collectionType={collectionType}
+                    currentUserId={currentUserId}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          {totalPages > 1 && (
+            <Pagination
+              urlParamName={urlParamName}
+              page={page}
+              totalPages={totalPages}
+            />
+          )}
+        </>
       ) : (
         <div className="flex items-center justify-center max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full min-h-[200px] flex-col gap-3 rounded-[14px] bg-gray-200 py-28 text-center">
           <h3 className="font-bold text-[20px] leading-[30px] tracking-[2%] md:text-[28px] md:leading-[36px]">
