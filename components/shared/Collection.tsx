@@ -10,7 +10,11 @@ type CollectionProps = {
   totalPages?: number;
   urlParamName?: string;
   currentUserId?: string;
-  collectionType: "All_Problems" | "My_Problems" | "Saved_Problems" | "Trending_Problems";
+  collectionType:
+    | "All_Problems"
+    | "My_Problems"
+    | "Saved_Problems"
+    | "Trending_Problems";
 };
 
 const Collection = ({
@@ -27,16 +31,18 @@ const Collection = ({
   return (
     <>
       {data.length > 0 ? (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          <ul className="">
-            {data.map((problem) => {
-              return (
-                <li key={problem._id}>
-                  <Card problem={problem} collectionType={collectionType} currentUserId={currentUserId} />
-                </li>
-              );
-            })}
-          </ul>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data.map((problem) => {
+            return (
+              <div key={problem._id}>
+                <Card
+                  problem={problem}
+                  collectionType={collectionType}
+                  currentUserId={currentUserId}
+                />
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className="flex items-center justify-center max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full min-h-[200px] flex-col gap-3 rounded-[14px] bg-gray-200 py-28 text-center">

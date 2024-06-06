@@ -27,7 +27,7 @@ const Card = ({ problem, collectionType, currentUserId }: CardProps) => {
       <Link href={`/problems/${problem._id}`} className="">
         <div className="p-4">
           <h1 className="text-lg font-semibold">{problem.title}</h1>
-          <p className="overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <p className="line-clamp-2">
             {problem.description}
           </p>
         </div>
@@ -66,11 +66,14 @@ const Card = ({ problem, collectionType, currentUserId }: CardProps) => {
         </>
       )}
 
-{collectionType === "Saved_Problems" && (
+      {collectionType === "Saved_Problems" && (
         <>
           <hr />
           <div className="p-4 flex flex-wrap gap-4 items-center">
-            <DeleteSavedProblem problemId={problem._id} currentUserId={currentUserId} />
+            <DeleteSavedProblem
+              problemId={problem._id}
+              currentUserId={currentUserId}
+            />
           </div>
         </>
       )}

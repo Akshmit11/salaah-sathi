@@ -16,6 +16,8 @@ import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
+
+
 const populateProblem = async (query: any) => {
   return query.populate([
     {
@@ -89,7 +91,11 @@ export const getAllProblems = async ({
   try {
     await connectToDatabase();
 
-    const conditions = {};
+    const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {};
+    const categoryCondition = category ? { category: { $in: category } } : {}; // Use $in for filtering multiple categories
+    const conditions = {
+      $and: [titleCondition, categoryCondition],
+    };
 
     const problemsQuery = Problem.find(conditions)
       .sort({ createdAt: "desc" })
