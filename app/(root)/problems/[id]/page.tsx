@@ -1,9 +1,12 @@
 import Ad from "@/components/shared/Ad";
 import CommentForm from "@/components/shared/CommentForm";
+import SaveProblem from "@/components/shared/SaveProblem";
+import { Button } from "@/components/ui/button";
 import { getProblemById } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Plus } from "lucide-react";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -36,6 +39,10 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
           <div className="px-4 sm:px-0 text-justify">
             <p>{problem.description}</p>
           </div>
+          {/* Save */}
+          {/* TODO */}
+          <SaveProblem />
+
           <div className="mt-10 px-4 sm:px-0 text-justify">
             <h1 className="text-2xl font-bold mb-10">Comments</h1>
           </div>

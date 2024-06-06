@@ -20,6 +20,7 @@ export interface IProblem extends Document {
   category: string;
   user: { _id: string; username: string };
   comments: IComment[];
+  timesSaved: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -33,6 +34,7 @@ const ProblemSchema: Schema<IProblem> = new Schema({
   },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   comments: { type: [CommentSchema], default: [] },
+  timesSaved: { type: Number, default: 0 }, 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

@@ -74,3 +74,24 @@ export const deleteUser = async (clerkId: string) => {
     handleError(error);
   }
 };
+
+// increament problems
+export const increaseProblem = async (userId: string) => {
+  try {
+    await connectToDatabase();
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $inc: { total_problems: 1 } },
+      { new: true }
+    );
+    
+    if (!user) throw new Error("User not found");
+
+
+
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    handleError(error);
+  }
+}

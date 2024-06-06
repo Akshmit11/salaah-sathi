@@ -31,7 +31,11 @@ export const createProblem = async ({
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerkId: userId });
+    const user = await User.findOneAndUpdate(
+      { clerkId: userId },
+      { $inc: { total_problems: 1 } },
+      { new: true }
+    );
 
     if (!user) {
       throw new Error("User not found!");
@@ -67,24 +71,29 @@ export const getProblemById = async (problemId: string) => {
 };
 
 // read problem
-export const getAllProblems = async ({ query, limit = 6, page, category }: GetAllProblemParams) => {
+export const getAllProblems = async ({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllProblemParams) => {
   try {
     await connectToDatabase();
 
     const conditions = {};
 
     const problemsQuery = Problem.find(conditions)
-      .sort({ createdAt: "desc"})
+      .sort({ createdAt: "desc" })
       .skip(0)
       .limit(limit);
 
-    const problems = await populateProblem(problemsQuery)
+    const problems = await populateProblem(problemsQuery);
     const problemsCount = await Problem.countDocuments(conditions);
 
     return {
       data: JSON.parse(JSON.stringify(problems)),
-      totalPages: Math.ceil(problemsCount / limit)
-    }
+      totalPages: Math.ceil(problemsCount / limit),
+    };
   } catch (error) {
     handleError(error);
   }
