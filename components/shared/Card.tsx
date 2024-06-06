@@ -21,7 +21,7 @@ const Card = ({ problem }: CardProps) => {
     <Link href={`/problems/${problem._id}`} className="">
       <div className="border-[1px] border-gray-300 rounded-lg transition-all hover:shadow-xl hover:-m-2">
         <div className="p-4">
-          <h1>{problem.title}</h1>
+          <h1 className="text-lg font-semibold">{problem.title}</h1>
           <p className="overflow-hidden overflow-ellipsis whitespace-nowrap">
             {problem.description}
           </p>
@@ -36,7 +36,7 @@ const Card = ({ problem }: CardProps) => {
           </p>
           <p className="flex gap-1 items-center">
             <Heart color="#0ea5e9" />{" "}
-            <span className="font-light italic text-sm">28</span>
+            <span className="font-light italic text-sm">{problem.timesSaved}</span>
           </p>
           <p className="flex gap-1 items-center">
             <Calendar color="#0ea5e9" />{" "}

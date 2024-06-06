@@ -1,12 +1,11 @@
 import Ad from "@/components/shared/Ad";
 import Collection from "@/components/shared/Collection";
-import { getAllMyProblems } from "@/lib/actions/problem.actions";
+import { getAllSavedProblems } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import React from "react";
 
-const PastProblemsPage = async () => {
+const SaveProblemsPage = async () => {
   const { userId } = auth();
   if (!userId) {
     redirect("/sign-in");
@@ -18,7 +17,7 @@ const PastProblemsPage = async () => {
     redirect("/");
   }
 
-  const problems = await getAllMyProblems({
+  const problems = await getAllSavedProblems({
     userId: currentUser._id,
     page: 1,
     limit: 6,
@@ -30,15 +29,15 @@ const PastProblemsPage = async () => {
 
       <Collection
         data={problems?.data}
-        emptyTitle={"You uploaded no problems"}
-        emptySubtitle={"Upload one if you have"}
+        emptyTitle={"You haved no saved problems"}
+        emptySubtitle={"Save one if you find it interesting"}
         limit={6}
         page={1}
         totalPages={2}
-        collectionType={"My_Problems"}
+        collectionType={"Saved_Problems"}
       />
     </main>
   );
 };
 
-export default PastProblemsPage;
+export default SaveProblemsPage;

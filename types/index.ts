@@ -76,3 +76,24 @@ export type GetAllProblemParams = {
   page: number;
 }
 
+// get amy problems
+export type GetMyProblemParams = {
+  userId: string;
+  limit: number;
+  page: number;
+}
+
+// get all saved problems
+export type GetSavedProblemParams = {
+  userId: string;
+  limit: number;
+  page: number;
+}
+
+// get all trending problems
+export type GetTrendingProblemParams = {
+  query: string;
+  category: string;
+  limit: number;
+  page: number;
+}

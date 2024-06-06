@@ -41,7 +41,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
           </div>
           {/* Save */}
           {/* TODO */}
-          <SaveProblem />
+          <SaveProblem problemId={problem._id} userId={currentUser._id} />
 
           <div className="mt-10 px-4 sm:px-0 text-justify">
             <h1 className="text-2xl font-bold mb-10">Comments</h1>

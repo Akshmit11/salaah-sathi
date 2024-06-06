@@ -9,6 +9,10 @@ export const headerLinks = [
       label: "Past Problems",
       route: "/past-problems",
     },
+    {
+      label: "Saved Problems",
+      route: "/save-problems",
+    }
   ];
 
 export const categoryEnum = z.enum(["Education",

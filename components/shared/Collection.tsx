@@ -9,7 +9,7 @@ type CollectionProps = {
   page: number | string;
   totalPages?: number;
   urlParamName?: string;
-  collectionType: "All_Problems" | "My_Problems";
+  collectionType: "All_Problems" | "My_Problems" | "Saved_Problems" | "Trending_Problems";
 };
 
 const Collection = ({

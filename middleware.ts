@@ -6,6 +6,7 @@ import {
   const isProtectedRoute = createRouteMatcher([
     '/trending(.*)',
     '/past-problems(.*)',
+    '/save-problems(.*)',
     '/problems(.*)'
   ]);
   

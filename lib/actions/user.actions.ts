@@ -6,7 +6,7 @@ import { connectToDatabase } from "../database/mongoose";
 import User from "../database/models/user.model";
 import { revalidatePath } from "next/cache";
 import Problem from "../database/models/problem.model";
-
+import { Types } from "mongoose";
 
 // create user - C
 export const createUser = async (user: CreateUserParams) => {
@@ -75,23 +75,50 @@ export const deleteUser = async (clerkId: string) => {
   }
 };
 
-// increament problems
-export const increaseProblem = async (userId: string) => {
+// save problem
+export const saveProblem = async (problemId: string, userId: string) => {
   try {
     await connectToDatabase();
+    
+    const problem = await Problem.findByIdAndUpdate(
+      problemId,
+      { $inc: { timesSaved: 1 } },
+      { new: true }
+    );
+    if (!problem) throw new Error("Problem does not exists");
 
     const user = await User.findByIdAndUpdate(
       userId,
-      { $inc: { total_problems: 1 } },
+      { $addToSet: { saveProblems: problemId } }, // $addToSet prevents duplicates
       { new: true }
     );
-    
-    if (!user) throw new Error("User not found");
 
-
-
+    if (!user) {
+      throw new Error("User not found");
+    }
     return JSON.parse(JSON.stringify(user));
+    
   } catch (error) {
     handleError(error);
   }
-}
+};
+
+
+// get if the problem is saved or not
+export const getIsSavedProblem = async (problemId: string, userId: string) => {
+  try {
+    await connectToDatabase();
+
+    const problem = await Problem.findById(problemId);
+    if (!problem) throw new Error("Problem does not exists");
+
+    const user: any = await User.findById(userId).lean();
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const isSaved = user.saveProblems.some((savedProblemId: Types.ObjectId) => savedProblemId.equals(problemId));
+    return isSaved;
+  } catch (error) {
+    handleError(error);
+  }
+};

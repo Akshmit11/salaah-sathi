@@ -24,7 +24,11 @@ export const createComment = async ({
       throw new Error("Problem not found!");
     }
 
-    const user = await User.findOne({ clerkId: userId });
+    const user = await User.findOneAndUpdate(
+      { clerkId: userId },
+      { $inc: { total_comments: 1 } },
+      { new: true }
+    );
 
     if (!user) {
       throw new Error("User not found!");
