@@ -24,7 +24,7 @@ const Footer = () => {
               Privacy Policy
             </Link>
           </p>
-          <p>
+          <p className="hover:underline hover:underline-offset-2 font-medium text-sm">
             Post Your Ads
           </p>
           <p>
