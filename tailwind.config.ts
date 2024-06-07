@@ -29,9 +29,9 @@ const config = {
           100: "#e0f2fe",
           200: "#bae6fd",
           300: "#7dd3fc",
-          400: "#38bdf8",
-          500: "#0ea5e9",
-          DEFAULT: "#0ea5e9",
+          400: "#38B6FF",
+          500: "#004AAD",
+          DEFAULT: "#004AAD",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

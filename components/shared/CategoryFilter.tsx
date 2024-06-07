@@ -10,7 +10,6 @@ import {
 import { categoryEnum } from "@/constants";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 const CategoryFilter = () => {
   const categories = categoryEnum.Enum;
@@ -38,12 +37,12 @@ const CategoryFilter = () => {
 
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)} defaultValue="All">
-      <SelectTrigger className="w-full h-[54px] mb-4 ml-4">
+      <SelectTrigger className="w-full h-[54px] mb-4 lg:ml-4">
         <SelectValue placeholder="Type of Problem" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="All">Type of Problem - All</SelectItem>
-        {Object.values(categories).map((category) => (
+        {Object.values(categories).map((category: any) => (
           <SelectItem key={category} value={category}>
             {category}
           </SelectItem>

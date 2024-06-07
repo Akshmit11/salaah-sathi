@@ -3,20 +3,36 @@ import Link from "next/link"
 
 const Footer = () => {
   return (
-    <footer className="border-t">
-      <div className="space-y-4 sm:space-y-0 sm:flex sm:justify-between  py-6 px-10 shadow-sm max-w-7xl lg:mx-auto w-full">
+    <footer className="border-t border-r-0 border-l-0 border-b-0">
+      <div className="space-y-4 md:space-y-0 md:space-x-3 md:flex md:justify-between py-6 px-10 max-w-7xl lg:mx-auto w-full items-center">
         <Link href='/'>
-          <Image 
-            src="/logo.svg"
-            alt="logo"
-            width={128}
-            height={38}
-          />
+          <Image src={"/logo.png"} alt="logo" width={150} height={150} />
         </Link>
 
         <p className="">
-          2024 Salaah Sathi. All Rights reserved.
+          2024 Bonnie Foi Technology. All Rights reserved.
         </p>
+
+        <div>
+          <p>
+            <Link href={'/terms-and-conditions'} className="hover:underline hover:underline-offset-2 font-medium text-sm">
+              Terms and Conditions
+            </Link>
+          </p>
+          <p>
+            <Link href={'/privacy-policy'} className="hover:underline hover:underline-offset-2 font-medium text-sm">
+              Privacy Policy
+            </Link>
+          </p>
+          <p>
+            Post Your Ads
+          </p>
+          <p>
+            <Link href={'mailto:bonniefoitech@gmail.com'} className="hover:underline hover:underline-offset-2 font-medium text-sm">
+              Contact Us - <span className="italic">bonniefoitech@gmail.com</span>
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   )
