@@ -39,10 +39,13 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
           <div className="px-4 sm:px-0 text-justify">
             <p>{problem.description}</p>
           </div>
-          {/* Save */}
-          {/* TODO */}
           <SaveProblem problemId={problem._id} userId={currentUser._id} />
-
+          <div className="px-4 sm:px-0 text-justify mt-2">
+            <h1 className="text-lg font-medium italic">AI Generated</h1>
+            <p className="text-sm">
+              {problem.aiSolution}
+            </p>
+          </div>
           <div className="mt-10 px-4 sm:px-0 text-justify">
             <h1 className="text-2xl font-bold mb-10">Comments</h1>
           </div>

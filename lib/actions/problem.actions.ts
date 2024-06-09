@@ -1,5 +1,7 @@
 "use server";
 
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 import {
   CreateProblemParams,
   GetAllProblemParams,
@@ -52,8 +54,15 @@ export const createProblem = async ({
       throw new Error("User not found!");
     }
 
+    
+    const aiSolution = await generateText({
+      model: openai('gpt-3.5-turbo'),
+      prompt: `Problem title: ${problem.title}, problem description: ${problem.description} and problem category: ${problem.category}. Based on the given data generate a good and realistic and practical solution under 500 characters. Offer concise and effective way to handle the problem. Your goal is to help users find the best possible resolution efficiently and empathetically.`,
+    });
+
     const newProblem = await Problem.create({
       ...problem,
+      aiSolution: aiSolution.text,
       user: user._id,
     });
     revalidatePath(path);
