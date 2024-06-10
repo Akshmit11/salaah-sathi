@@ -30,7 +30,7 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col gap-6 bg-white lg:hidden">
           <Link href={'/'} onClick={() => {setOpenSheet(false)}}> 
-            <Image src={"/logo.svg"} alt="logo" width={128} height={38} />
+            <Image src={"/logo.png"} alt="logo" width={128} height={38} />
           </Link>
           <Separator className="border border-gray-50" />
           <ul className="space-y-4">
