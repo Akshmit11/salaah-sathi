@@ -18,9 +18,16 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
-          {children}
-        </body>
+        <head>
+          {process.env.NODE_ENV === "production" && (
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181574493921236"
+              crossOrigin="anonymous"
+            ></script>
+          )}
+        </head>
+        <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
   );
