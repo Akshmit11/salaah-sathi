@@ -27,8 +27,6 @@ const SaveProblemsPage = async ({ searchParams }: SearchParamProps) => {
 
   return (
     <main className="px-4 sm:px-0">
-      <Ad />
-
       <Collection
         data={problems?.data}
         emptyTitle={"You haved no saved problems"}

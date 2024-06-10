@@ -1,27 +1,24 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ProblemFormDefaultValues, categoryEnum } from "@/constants";
-import { problemFormSchema } from "@/lib/validator";
-import Dropdown from "./Dropdown";
-import { useState } from "react";
-import { Textarea } from "../ui/textarea";
-import { useRouter } from "next/navigation";
 import { createProblem, updateProblem } from "@/lib/actions/problem.actions";
 import { IProblem } from "@/lib/database/models/problem.model";
+import { problemFormSchema } from "@/lib/validator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Textarea } from "../ui/textarea";
+import Dropdown from "./Dropdown";
 
 type PropertyFormProps = {
   userId: string;
@@ -44,13 +41,10 @@ const ProblemForm = ({
       ? {
           title: problem.title,
           description: problem.description,
-          category: problem.category as (typeof ProblemFormDefaultValues.category)
+          category:
+            problem.category as typeof ProblemFormDefaultValues.category,
         }
       : ProblemFormDefaultValues;
-
-  const [selectedCategory, setSelectedCategory] = useState(
-    ProblemFormDefaultValues.category
-  );
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof problemFormSchema>>({
@@ -77,8 +71,7 @@ const ProblemForm = ({
     }
     // console.log(values)
     if (type === "Update") {
-
-      if(!problemId) {
+      if (!problemId) {
         router.back();
         return;
       }
@@ -88,7 +81,7 @@ const ProblemForm = ({
           problem: { ...values, _id: problemId },
           path: `/problems/${problemId}`,
         });
-        
+
         if (updatedProblem) {
           form.reset();
           router.push(`/problems/${updatedProblem._id}`);

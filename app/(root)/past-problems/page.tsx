@@ -27,8 +27,6 @@ const PastProblemsPage = async ({ searchParams }: SearchParamProps) => {
 
   return (
     <main className="px-4 sm:px-0">
-      <Ad />
-
       <Collection
         data={problems?.data}
         emptyTitle={"You uploaded no problems"}

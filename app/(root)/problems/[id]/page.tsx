@@ -30,7 +30,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
   return (
     <>
       <section className="w-full flex flex-col md:flex-row gap-4">
-        <section className="w-full md:w-3/4">
+        <section className="w-full">
           <div className="py-5 md:py-10">
             <h1 className="text-center h3-bold sm:text-left">
               {problem.title} <br />
@@ -47,7 +47,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
             </p>
           </div>
           <div className="mt-10 px-4 sm:px-0 text-justify">
-            <h1 className="text-2xl font-bold mb-10">Comments</h1>
+            <h1 className="text-2xl font-bold mb-10">Suggestions</h1>
           </div>
           <div className="mt-10 px-4 sm:px-0">
             {problem.user._id === currentUser._id ? (
@@ -70,14 +70,12 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
               </>
             ) : (
               <div className="w-full h-20 flex items-center justify-center border-[2px] border-gray-400 rounded-md border-dashed">
-                <h1>No Comments</h1>
+                <h1>No Suggestions till now...</h1>
               </div>
             )}
           </div>
         </section>
-        <section className="w-full md:w-1/4 space-y-4">
-          <Ad />
-        </section>
+        
       </section>
     </>
   );

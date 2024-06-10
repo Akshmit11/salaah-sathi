@@ -28,15 +28,6 @@ const Footer = () => {
               Privacy Policy
             </Link>
           </p>
-          {/* https://forms.gle/fi97nLcjUUFk2HJZ7 */}
-          <p>
-            <Link
-              href={"https://forms.gle/fi97nLcjUUFk2HJZ7"}
-              className="hover:underline hover:underline-offset-2 font-medium text-sm"
-            >
-              Post Your Ads
-            </Link>
-          </p>
           <p>
             <Link
               href={"mailto:bonniefoitech@gmail.com"}
