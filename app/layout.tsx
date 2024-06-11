@@ -6,8 +6,11 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Suggest Solutions",
-  description: "Upload Problems, Solve Problems",
+  title: "Suggest Solutions | Community-Driven Problem Solving",
+  description: "Join Suggest Solutions to upload problems and receive practical solutions from a helpful community. Empower yourself and others by sharing knowledge and expertise.",
+  keywords: "problem solving, community solutions, advice, help, support, practical solutions, suggest solutions, crowdsource solutions",
+  robots: "index, follow",
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({
