@@ -8,9 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Suggest Solutions | Community-Driven Problem Solving",
   description: "Join Suggest Solutions to upload problems and receive practical solutions from a helpful community. Empower yourself and others by sharing knowledge and expertise.",
-  keywords: "problem solving, community solutions, advice, help, support, practical solutions, suggest solutions, crowdsource solutions",
-  robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1.0",
+  keywords: ["problem solving", "community solutions", "advice", "help", "support", "practical solutions", "suggest solutions", "crowdsource solutions", "Health", "Career", "Technology", "Personal Finance", "Legal", "Housing", "Transportation", "Environment", "Social Issues", "Government Services", "Consumer Rights", "Relationships", "Personal Development", "suggest solutions"],
 };
 
 export default function RootLayout({
