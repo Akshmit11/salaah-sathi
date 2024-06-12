@@ -7,8 +7,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const problems = await getAllTrendingProblems({
     query: "",
     category: "",
-    page: 1,
-    limit: 6,
+    page: 0,
+    limit: 0,
   });
 
   const problemUrls = problems?.data?.map((problem: IProblem) => {
