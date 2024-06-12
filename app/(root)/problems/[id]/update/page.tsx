@@ -21,6 +21,9 @@ const ProblemUpdate = async ({ params: { id } }: UpdateProblemProps) => {
     }
   
     const problem = await getProblemById(id)
+    if (problem.user._id !== currentUser._id) {
+      redirect("/");
+    }
 
   return (
     <>

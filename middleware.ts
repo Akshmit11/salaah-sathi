@@ -7,7 +7,7 @@ import {
     '/trending(.*)',
     '/past-problems(.*)',
     '/save-problems(.*)',
-    '/problems(.*)'
+    // '/problems(.*)'
   ]);
   
   export default clerkMiddleware((auth, req) => {
