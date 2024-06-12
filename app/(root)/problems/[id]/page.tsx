@@ -1,14 +1,18 @@
-import Ad from "@/components/shared/Ad";
 import CommentForm from "@/components/shared/CommentForm";
 import SaveProblem from "@/components/shared/SaveProblem";
-import { Button } from "@/components/ui/button";
 import { getProblemById } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
-import { Plus } from "lucide-react";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import React from "react";
+
+export async function generateMetadata({ params: { id } }: SearchParamProps): Promise<Metadata> {
+  const problem = await getProblemById(id);
+  return {
+    title: problem?.title,
+  }
+}
 
 const ProblemId = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
@@ -42,9 +46,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
           <SaveProblem problemId={problem._id} userId={currentUser._id} />
           <div className="px-4 sm:px-0 text-justify mt-2">
             <h1 className="text-lg font-medium italic">AI Generated</h1>
-            <p className="text-sm">
-              {problem.aiSolution}
-            </p>
+            <p className="text-sm">{problem.aiSolution}</p>
           </div>
           <div className="mt-10 px-4 sm:px-0 text-justify">
             <h1 className="text-2xl font-bold mb-10">Suggestions</h1>
@@ -75,7 +77,6 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
             )}
           </div>
         </section>
-        
       </section>
     </>
   );

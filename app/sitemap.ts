@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const problemUrls = problems?.data?.map((problem: IProblem) => {
     return {
       url: `${baseUrl}/problems/${problem._id}`,
-      lastModified: problem.updatedAt.toISOString(),
+      lastModified: problem.updatedAt,
     };
   });
 
