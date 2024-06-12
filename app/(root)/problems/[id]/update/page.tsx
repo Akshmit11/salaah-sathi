@@ -2,6 +2,7 @@ import ProblemForm from "@/components/shared/ProblemForm";
 import { getProblemById } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -9,6 +10,11 @@ type UpdateProblemProps = {
   params: {
     id: string;
   }
+}
+
+export const metadata: Metadata = {
+  title: 'Update Problem',
+  description: 'Edit and update your previously posted problems. Make changes to your issues to provide more details or update their status.',
 }
 
 const ProblemUpdate = async ({ params: { id } }: UpdateProblemProps) => {

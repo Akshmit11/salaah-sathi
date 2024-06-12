@@ -4,7 +4,13 @@ import { getAllSavedProblems } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: 'Saved Problem',
+  description: 'Access and review the problems you have saved for later. Keep track of issues that are important to you and revisit them at any time.',
+}
 
 const SaveProblemsPage = async ({ searchParams }: SearchParamProps) => {
   const { userId } = auth();

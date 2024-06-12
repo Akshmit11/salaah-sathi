@@ -4,8 +4,14 @@ import { getAllMyProblems } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: 'My Past Problems',
+  description: 'Explore and review your previously posted problems and the solutions provided by the community. Stay informed and keep track of your problem-solving journey.',
+}
 
 const PastProblemsPage = async ({ searchParams }: SearchParamProps) => {
   const { userId } = auth();

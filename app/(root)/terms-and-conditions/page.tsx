@@ -1,4 +1,9 @@
-import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Terms and Conditions',
+  description: 'Read our terms and conditions to understand the rules and guidelines for using our platform. Learn about your rights and responsibilities as a user.',
+}
 
 const TermsAndConditions = () => {
   return (

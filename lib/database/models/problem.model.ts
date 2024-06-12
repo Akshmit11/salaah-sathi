@@ -13,7 +13,6 @@ const CommentSchema: Schema<IComment> = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-
 export interface IProblem extends Document {
   _id: string;
   title: string;
@@ -30,14 +29,11 @@ export interface IProblem extends Document {
 const ProblemSchema: Schema<IProblem> = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  category: {
-    type: String,
-    required: true,
-  },
+  category: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   aiSolution: { type: String, required: true },
   comments: { type: [CommentSchema], default: [] },
-  timesSaved: { type: Number, default: 0 }, 
+  timesSaved: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

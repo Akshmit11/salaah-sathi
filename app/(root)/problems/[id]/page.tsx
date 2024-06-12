@@ -38,12 +38,12 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
     <>
       <section className="w-full flex flex-col md:flex-row gap-4">
         <section className="w-full">
-          <div className="py-5 md:py-10">
-            <h1 className="text-center h3-bold sm:text-left">
-              {problem.title} <br />
+          <div className="px-4 sm:px-0 py-5 md:py-10">
+            <h1 className="text-left text-2xl font-bold">
+              {problem.title} 
             </h1>
           </div>
-          <div className="px-4 sm:px-0 text-justify">
+          <div className="px-4 sm:px-0">
             <p>{problem.description}</p>
           </div>
 
@@ -53,11 +53,11 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
             <></>
           )}
 
-          <div className="px-4 sm:px-0 text-justify mt-2">
+          <div className="px-4 sm:px-0 mt-4">
             <h1 className="text-lg font-medium italic">AI Generated</h1>
             <p className="text-sm">{problem.aiSolution}</p>
           </div>
-          <div className="mt-10 px-4 sm:px-0 text-justify">
+          <div className="mt-10 px-4 sm:px-0">
             <h1 className="text-2xl font-bold mb-10">Suggestions</h1>
           </div>
 

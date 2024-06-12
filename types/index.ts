@@ -40,25 +40,29 @@ export type CreateProblemParams = {
     title: string;
     description: string;
     category:
-      | "Education"
-      | "Health"
+      | "Astrology"
       | "Career"
-      | "Technology"
-      | "Personal Finance"
-      | "Legal"
-      | "Housing"
-      | "Transportation"
-      | "Environment"
-      | "Social Issues"
-      | "Government Services"
       | "Consumer Rights"
-      | "Relationships"
+      | "Education"
+      | "Environment"
+      | "Government Services"
+      | "Health"
+      | "Housing"
+      | "Legal"
       | "Personal Development"
+      | "Personal Finance"
+      | "Politics"
+      | "Relationships"
+      | "Social Issues"
+      | "Sports"
+      | "Technology"
+      | "Transportation"
       | "Other";
   };
   userId: string;
   path: string;
 };
+
 
 // create comment params
 export type CreateCommentParams = {

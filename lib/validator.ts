@@ -1,22 +1,26 @@
 import * as z from "zod";
 
 export const categoryEnum = [
-  "Education",
-  "Health",
+  "Astrology",
   "Career",
-  "Technology",
-  "Personal Finance",
-  "Legal",
-  "Housing",
-  "Transportation",
-  "Environment",
-  "Social Issues",
-  "Government Services",
   "Consumer Rights",
-  "Relationships",
+  "Education",
+  "Environment",
+  "Government Services",
+  "Health",
+  "Housing",
+  "Legal",
+  "Other",
   "Personal Development",
-  "Other"
+  "Personal Finance",
+  "Politics",
+  "Relationships",
+  "Social Issues",
+  "Sports",
+  "Technology",
+  "Transportation"
 ] as const;
+
 
 export const problemFormSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
