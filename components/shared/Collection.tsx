@@ -29,6 +29,8 @@ const Collection = ({
   currentUserId,
   collectionType,
 }: CollectionProps) => {
+
+
   return (
     <>
       {data.length > 0 ? (

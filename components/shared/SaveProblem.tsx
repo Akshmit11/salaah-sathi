@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 type SaveProblemProps = {
   problemId: string;
-  userId: any;
+  userId: string;
 };
 
 const SaveProblem = ({ problemId, userId }: SaveProblemProps) => {

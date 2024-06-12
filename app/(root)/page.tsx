@@ -13,13 +13,14 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || '';
   const category = (searchParams?.category as string) || '';
-
+  console.log(page)
   const problems = await getAllProblems({
     query: searchText,
     category,
     page,
     limit: 6
   });
+
 
   return (
     <main className="px-4 sm:px-0">

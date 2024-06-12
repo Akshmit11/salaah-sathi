@@ -106,9 +106,11 @@ export const getAllProblems = async ({
       $and: [titleCondition, categoryCondition],
     };
 
+    const skipAmount = (Number(page) - 1) * limit
+
     const problemsQuery = Problem.find(conditions)
       .sort({ createdAt: "desc" })
-      .skip(0)
+      .skip(skipAmount)
       .limit(limit);
 
     const problems = await populateProblem(problemsQuery);
@@ -167,9 +169,11 @@ export const getAllMyProblems = async ({
 
     const conditions = { user: userId };
 
+    const skipAmount = (Number(page) - 1) * limit
+
     const problemsQuery = Problem.find(conditions)
       .sort({ createdAt: "desc" })
-      .skip(0)
+      .skip(skipAmount)
       .limit(limit);
 
     const problems = await populateProblem(problemsQuery);
@@ -200,9 +204,11 @@ export const getAllSavedProblems = async ({
 
     const conditions = { _id: { $in: savedProblemIds } };
 
+    const skipAmount = (Number(page) - 1) * limit
+
     const problemsQuery = Problem.find(conditions)
       .sort({ createdAt: "desc" })
-      .skip((page - 1) * limit)
+      .skip(skipAmount)
       .limit(limit);
 
     const problems = await populateProblem(problemsQuery);
@@ -228,10 +234,11 @@ export const getAllTrendingProblems = async ({
     await connectToDatabase();
 
     const conditions = {};
+    const skipAmount = (Number(page) - 1) * limit
 
     const problemsQuery = Problem.find(conditions)
       .sort({ timesSaved: "desc" })
-      .skip(0)
+      .skip(skipAmount)
       .limit(limit);
 
     const problems = await populateProblem(problemsQuery);

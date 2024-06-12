@@ -14,6 +14,7 @@ export async function generateMetadata({
   const problem = await getProblemById(id);
   return {
     title: problem?.title,
+    description: problem?.description
   };
 }
 
@@ -21,7 +22,6 @@ let currentUser: any = null;
 const ProblemId = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
   if (userId) {
-    // redirect("/sign-in");
     currentUser = (await getUserById(userId)) as IUser;
 
     if (!currentUser) {
