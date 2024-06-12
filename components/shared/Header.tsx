@@ -1,18 +1,17 @@
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { Button } from '../ui/button'
-import { Plus } from 'lucide-react'
-import NavItems from './NavItems'
 import MobileNav from './MobileNav'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import NavItems from './NavItems'
 
 const Header = () => {
   return (
-    <header className="flex justify-between p-6 px-5 sm:px-10 shadow-sm fixed top-0 z-10 max-w-7xl lg:mx-auto w-full bg-white">
+    <header className="flex justify-between p-2 px-5 sm:px-10 shadow-sm fixed top-0 z-10 max-w-7xl lg:mx-auto w-full bg-white">
       <div className="flex gap-10 items-center">
         <Link href={'/'} className="cursor-pointer">
-          <Image src={"/logo.png"} alt="logo" width={150} height={150} />
+          <Image src={"/img3.webp"} alt="logo" width={450} height={450} className='w-52 h-24' />
         </Link>
         <NavItems />
       </div>
