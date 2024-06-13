@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +34,7 @@ export default function RootLayout({
           )}
         </head>
         <body className={inter.className}>{children}</body>
+        <GoogleTagManager gtmId="AW-372101184" />
       </html>
     </ClerkProvider>
   );
