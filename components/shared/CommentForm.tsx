@@ -65,7 +65,7 @@ const CommentForm = ({ userId, problemId }: CommentFormProps) => {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormControl>
-                    <Textarea placeholder="Enter your comment here" {...field} />
+                    <Textarea placeholder="Enter your solution here" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -77,7 +77,7 @@ const CommentForm = ({ userId, problemId }: CommentFormProps) => {
               className="sm:w-fit sm:flex sm:float-end sm:self-"
               disabled={form.formState.isSubmitting}
             >
-              {form.formState.isSubmitting ? `Processing...` : `Comment`}
+              {form.formState.isSubmitting ? `Processing...` : `Submit`}
             </Button>
           </div>
         </form>

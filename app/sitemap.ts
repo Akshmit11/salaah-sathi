@@ -1,15 +1,10 @@
 import { MetadataRoute } from "next";
-import { getAllTrendingProblems } from "../lib/actions/problem.actions";
 import { IProblem } from "../lib/database/models/problem.model";
+import { getAllProblemsForSitemap } from "@/lib/actions/problem.actions";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://suggestsolutions.com";
-  const problems = await getAllTrendingProblems({
-    query: "",
-    category: "",
-    page: 1,
-    limit: 10,
-  });
+  const problems = await getAllProblemsForSitemap();
 
   const problemUrls = problems?.data?.map((problem: IProblem) => {
     return {

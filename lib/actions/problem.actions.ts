@@ -306,3 +306,18 @@ export const deleteSavedProblem = async ({
     handleError(error);
   }
 };
+
+export const getAllProblemsForSitemap = async () => {
+  try {
+    await connectToDatabase();
+
+    const problemsQuery = Problem.find().sort({ createdAt: "desc" });
+    const problems = await populateProblem(problemsQuery);
+
+    return {
+      data: JSON.parse(JSON.stringify(problems)),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+};
