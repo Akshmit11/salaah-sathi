@@ -22,8 +22,8 @@ const TrendingProblemPage = async ({ searchParams }: SearchParamProps) => {
     <main className="px-4 sm:px-0">
       <Collection
         data={problems?.data}
-        emptyTitle={"You haved no saved problems"}
-        emptySubtitle={"Save one if you find it interesting"}
+        emptyTitle={"There are currently no Trending Problems"}
+        emptySubtitle={"See if yours could become one"}
         limit={6}
         page={page}
         totalPages={problems?.totalPages}
