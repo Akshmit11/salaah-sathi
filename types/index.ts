@@ -122,6 +122,7 @@ export type UpdateProblemParams = {
     _id: string;
     title: string;
     category: string;
+    imageUrls: string[] | undefined
   };
   path: string;
 }

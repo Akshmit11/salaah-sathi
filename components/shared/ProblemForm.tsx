@@ -85,6 +85,7 @@ const ProblemForm = ({
         console.log(error);
       }
     }
+
     if (type === "Update") {
       if (!problemId) {
         router.back();
@@ -93,7 +94,7 @@ const ProblemForm = ({
       try {
         const updatedProblem = await updateProblem({
           userId,
-          problem: { ...values, _id: problemId },
+          problem: { ...values, _id: problemId, imageUrls: uploadedImageUrls },
           path: `/problems/${problemId}`,
         });
 
