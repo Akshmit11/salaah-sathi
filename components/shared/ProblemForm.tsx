@@ -12,13 +12,15 @@ import { Input } from "@/components/ui/input";
 import { ProblemFormDefaultValues, categoryEnum } from "@/constants";
 import { createProblem, updateProblem } from "@/lib/actions/problem.actions";
 import { IProblem } from "@/lib/database/models/problem.model";
+import { useUploadThing } from "@/lib/uploadthing";
 import { problemFormSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Textarea } from "../ui/textarea";
 import Dropdown from "./Dropdown";
+import FileUploader from "./FileUploader";
 
 type PropertyFormProps = {
   userId: string;
@@ -36,15 +38,20 @@ const ProblemForm = ({
   const categories = categoryEnum.Enum;
   const router = useRouter();
 
+  const [files, setFiles] = useState<File[]>([]);
+
   const initialValues =
     problem && type === "Update"
       ? {
-          title: problem.title,
-          description: problem.description,
+          ...problem,
           category:
             problem.category as typeof ProblemFormDefaultValues.category,
+           // TODO: update for problem image urls
+          // files: problem.imageUrls       
         }
       : ProblemFormDefaultValues;
+
+    const { startUpload } = useUploadThing('imageUploader')
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof problemFormSchema>>({
@@ -54,10 +61,19 @@ const ProblemForm = ({
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof problemFormSchema>) {
+    let uploadedImageUrls = values?.imageUrls; // Change to handle array
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
+      if (!uploadedImages) {
+        return;
+      }
+      uploadedImageUrls = uploadedImages.map(image => image.url); // Collect all URLs into an array
+    }
+
     if (type === "Upload") {
       try {
         const newProblem = await createProblem({
-          problem: values,
+          problem: {...values, imageUrls: uploadedImageUrls},
           userId,
           path: "/profile",
         });
@@ -69,7 +85,6 @@ const ProblemForm = ({
         console.log(error);
       }
     }
-    // console.log(values)
     if (type === "Update") {
       if (!problemId) {
         router.back();
@@ -131,24 +146,27 @@ const ProblemForm = ({
           />
         </div>
 
+        
+
+        {/* TODO: Image URLS Form */}
         <div className="flex flex-col">
-          <FormField
+        <FormField
             control={form.control}
-            name="description"
+            name="imageUrls"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Textarea
-                    placeholder="Problem Desciption"
-                    {...field}
-                    className="h-60"
+                  <FileUploader
+                    onFieldChange={field.onChange}
+                    imageUrls={field.value}
+                    setFiles={setFiles}
                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
-        </div>
+        </div>    
+
 
         <Button
           type="submit"

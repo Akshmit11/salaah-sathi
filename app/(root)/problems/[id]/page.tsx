@@ -1,4 +1,5 @@
 import CommentForm from "@/components/shared/CommentForm";
+import ImageCarousel from "@/components/shared/ImageCarousel";
 import SaveProblem from "@/components/shared/SaveProblem";
 import { getProblemById } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
@@ -14,7 +15,6 @@ export async function generateMetadata({
   const problem = await getProblemById(id);
   return {
     title: problem?.title,
-    description: problem?.description
   };
 }
 
@@ -38,14 +38,15 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
     <>
       <section className="w-full flex flex-col md:flex-row gap-4">
         <section className="w-full">
-          <div className="px-4 sm:px-0 py-5 md:py-10">
+          <div className="px-4 sm:px-0 py-5 pb-2 md:py-10 md:pb-2">
             <h1 className="text-left text-2xl font-bold">
               {problem.title} 
             </h1>
           </div>
-          <div className="px-4 sm:px-0">
-            <p>{problem.description}</p>
-          </div>
+
+          {problem?.imageUrls.length > 0 && (
+            <ImageCarousel data={problem?.imageUrls} />
+          )}
 
           {currentUser !== null ? (
             <SaveProblem problemId={problem._id} userId={currentUser._id} />

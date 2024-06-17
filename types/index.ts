@@ -38,7 +38,6 @@ export type UpdateUserParams = {
 export type CreateProblemParams = {
   problem: {
     title: string;
-    description: string;
     category:
       | "Astrology"
       | "Career"
@@ -58,6 +57,7 @@ export type CreateProblemParams = {
       | "Technology"
       | "Transportation"
       | "Other";
+    imageUrls: string[] | undefined;  
   };
   userId: string;
   path: string;
@@ -121,7 +121,6 @@ export type UpdateProblemParams = {
   problem: {
     _id: string;
     title: string;
-    description: string;
     category: string;
   };
   path: string;

@@ -40,7 +40,7 @@ export type categoryEnum = z.infer<typeof categoryEnum>;
 export const ProblemFormDefaultValues = {
   title: "",
   category: categoryEnum.Enum.Astrology, // Must match one of the enum values
-  description: "",
+  imageUrls: []
 };
 
 export const CommentFormDefaultValues = {

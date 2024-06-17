@@ -24,10 +24,10 @@ export const categoryEnum = [
 
 export const problemFormSchema = z.object({
   title: z.string().min(3, { message: "Title is required" }),
-  description: z.string().min(2, { message: "Description is required" }),
   category: z.enum(categoryEnum, {
     errorMap: () => ({ message: "Invalid category" }),
   }),
+  imageUrls: z.string().url().array().optional()
 });
 
 export const commentFormSchema = z.object({

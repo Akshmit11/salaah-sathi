@@ -16,24 +16,24 @@ const CommentSchema: Schema<IComment> = new Schema({
 export interface IProblem extends Document {
   _id: string;
   title: string;
-  description: string;
   category: string;
   user: { _id: string; username: string };
   aiSolution: string;
   comments: IComment[];
   timesSaved: number;
+  imageUrls: string[];
   createdAt: Date;
   updatedAt: Date;
 }
 
 const ProblemSchema: Schema<IProblem> = new Schema({
   title: { type: String, required: true },
-  description: { type: String, required: true },
   category: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   aiSolution: { type: String, required: true },
   comments: { type: [CommentSchema], default: [] },
   timesSaved: { type: Number, default: 0 },
+  imageUrls: { type: [String] },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
