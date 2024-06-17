@@ -68,10 +68,10 @@ const FileUploader = ({
       )}
       <div className="pt-4 flex gap-2 items-center">
         {files.length > 0 ? (
-          <p className="border p-2 rounded-lg">Selected {files.length} images</p>
+          <p className="border p-2 rounded-lg">Selected {files.length} / 4 images</p>
         ) : (
           <>
-            <p className="border p-2 rounded-lg">Selected 0 images</p>
+            <p className="border p-2 rounded-lg">Selected 0 / 4 images</p>
           </>
         )}
       </div>

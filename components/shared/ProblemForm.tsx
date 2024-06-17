@@ -145,15 +145,14 @@ const ProblemForm = ({
               </FormItem>
             )}
           />
-        </div>
-
-        
+        </div>   
 
         {/* TODO: Image URLS Form */}
         <div className="flex flex-col">
         <FormField
             control={form.control}
             name="imageUrls"
+            defaultValue={initialValues.imageUrls}
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
