@@ -11,19 +11,19 @@ import Image from "next/image";
 
 const ImageCarousel = ({ data }: { data: string[] | undefined }) => {
   return (
-    <Carousel className="w-full max-w-[300px] sm:max-w-sm md:max-w-md mx-auto">
+    <Carousel className="w-full max-w-[300px] sm:max-w-[500px] md:max-w-[700px] mx-auto">
       <CarouselContent>
         {data?.map((url, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
-              <div className="border">
-                <div className="flex aspect-square items-center justify-center p-6">
+              <div className="border rounded-md">
+                <div className="flex aspect-square items-center justify-center p-2">
                   <Image 
                     src={url}
                     alt={`image-${index}`}
-                    width={300}
+                    width={1000}
                     height={300}
-                    className="h-full min-h-[300px] object-cover object-center"
+                    className="h-full min-h-[300px] object-cover object-center rounded-md"
                   />
                 </div>
               </div>
