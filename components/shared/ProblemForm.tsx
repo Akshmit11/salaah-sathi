@@ -152,7 +152,6 @@ const ProblemForm = ({
         <FormField
             control={form.control}
             name="imageUrls"
-            defaultValue={initialValues.imageUrls}
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>

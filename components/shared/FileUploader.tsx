@@ -46,7 +46,7 @@ const FileUploader = ({
         <p>Upload any images here...</p>
       </div>
 
-      {files.length >  0 && (
+      {imageUrls && imageUrls?.length > 0 && (
         <div className="flex gap-2 mt-4">
           {/* images are shown here */}
           {imageUrls?.map((url, index) => (
@@ -67,8 +67,8 @@ const FileUploader = ({
         </div>
       )}
       <div className="pt-4 flex gap-2 items-center">
-        {files.length > 0 ? (
-          <p className="border p-2 rounded-lg">Selected {files.length} / 4 images</p>
+        {imageUrls && imageUrls?.length > 0 ? (
+          <p className="border p-2 rounded-lg">Selected {imageUrls.length} / 4 images</p>
         ) : (
           <>
             <p className="border p-2 rounded-lg">Selected 0 / 4 images</p>

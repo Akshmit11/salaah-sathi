@@ -34,7 +34,11 @@ const ProblemUpdate = async ({ params: { id } }: UpdateProblemProps) => {
   return (
     <>
       <section className="py-5 md:py-10">
-        <h1 className="text-center h3-bold sm:text-left">Update Problem</h1>
+        <div className="px-4 sm:px-0 py-5 pb-2 md:py-10 md:pb-2">
+          <h1 className="text-left text-2xl font-bold">
+            Update Problem
+          </h1>
+        </div>
       </section>
       <div className="my-8 px-5 sm:p-0">
         <ProblemForm userId={currentUser._id} type="Update" problem={problem} problemId={problem._id} />
