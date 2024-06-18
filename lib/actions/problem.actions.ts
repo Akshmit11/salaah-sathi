@@ -103,7 +103,7 @@ export const getAllProblems = async ({
     const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {};
     const categoryCondition = category ? { category: { $in: category } } : {}; // Use $in for filtering multiple categories
     const conditions = {
-      $and: [titleCondition, categoryCondition],
+      $or: [titleCondition, categoryCondition],
     };
 
     const skipAmount = (Number(page) - 1) * limit
