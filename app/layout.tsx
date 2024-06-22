@@ -11,8 +11,11 @@ export const metadata: Metadata = {
     default: "Suggest Solutions | Community-Driven Problem Solving",
     template: `%s | Suggest Solutions`,
   },
-  description:
-    "Join Suggest Solutions to upload problems and receive practical solutions from a helpful community. Empower yourself and others by sharing knowledge and expertise.",
+  openGraph: {
+    description:
+    "Join Suggest Solutions to upload problems and receive practical solutions from a helpful community. Empower yourself and others by sharing knowledge and expertise.",  
+    images: ['https://shorturl.at/5FMDj', 'https://shorturl.at/P96J0', 'https://shorturl.at/cB9Bf', 'https://shorturl.at/rVFcR'],
+  },
   keywords: [
     "problem solving",
     "community solutions",
