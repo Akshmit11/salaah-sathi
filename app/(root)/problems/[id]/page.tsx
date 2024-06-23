@@ -39,9 +39,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
       <section className="w-full flex flex-col md:flex-row gap-4">
         <section className="w-full">
           <div className="px-4 sm:px-0 py-5 pb-2 md:py-10 md:pb-2">
-            <h1 className="text-left text-2xl font-bold">
-              {problem.title} 
-            </h1>
+            <h1 className="text-left text-2xl font-bold">{problem.title}</h1>
           </div>
 
           {problem?.imageUrls.length > 0 && (
@@ -85,14 +83,27 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
           <div className="px-4 mt-10 sm:px-0 text-justify">
             {problem.comments.length !== 0 ? (
               <>
-                {problem.comments.map((comment: any) => (
-                  <div className="mb-4 border-[1px] p-2 rounded-md">
-                    <p className="mb-2">{comment?.text}</p>
-                    <p className="italic text-sm">
-                      ~ {comment?.user?.username}
-                    </p>
-                  </div>
-                ))}
+                {problem.comments.map((comment: any) => {
+                  // Format the date as desired
+                  const formattedDate = comment?.createdAt.toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  );
+
+                  return (
+                    <div className="mb-4 border-[1px] p-2 rounded-md">
+                      <p className="mb-2">{comment?.text}</p>
+                      <div className="italic text-sm flex justify-between items-center">
+                        <p>~ {comment?.user?.username}</p>
+                        <p>{formattedDate}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </>
             ) : (
               <div className="w-full h-20 flex items-center justify-center border-[2px] border-gray-400 rounded-md border-dashed">
