@@ -85,7 +85,8 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
               <>
                 {problem.comments.map((comment: any) => {
                   // Format the date as desired
-                  const formattedDate = comment?.createdAt.toLocaleDateString(
+                  const createdAt = new Date(comment?.createdAt);
+                  const formattedDate = createdAt.toLocaleDateString(
                     "en-US",
                     {
                       year: "numeric",
