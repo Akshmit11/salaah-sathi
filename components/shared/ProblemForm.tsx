@@ -75,7 +75,7 @@ const ProblemForm = ({
         const newProblem = await createProblem({
           problem: {...values, imageUrls: uploadedImageUrls},
           userId,
-          path: "/profile",
+          path: "/",
         });
         if (newProblem) {
           form.reset();

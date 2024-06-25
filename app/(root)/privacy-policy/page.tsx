@@ -1,20 +1,20 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Learn about how we handle your personal information, the types of data we collect, and our commitment to protecting your privacy. Understand your rights and our responsibilities under this policy.',
-}
-
+  title: "Privacy Policy",
+  description:
+    "Learn about how we handle your personal information, the types of data we collect, and our commitment to protecting your privacy. Understand your rights and our responsibilities under this policy.",
+};
 
 const PrivacyPolicy = () => {
   return (
     <>
+      <section className="py-5 md:py-10">
+        <h1 className="text-center text-2xl font-bold sm:text-left">
+          Privacy Policy
+        </h1>
+      </section>
       <section className="w-full flex flex-col">
-        <div className="py-5 md:py-10">
-          <h1 className="text-center h3-bold sm:text-left">
-            Privacy Policy <br />
-          </h1>
-        </div>
         <div className="px-4 sm:px-0 text-justify">
           <h3 className="font-semibold text-lg">1. Introduction</h3>
           <p className="mb-4 mt-2">
@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
             allows us to securely verify your identity without requiring
             extensive personal information.
           </p>
-          <p className="mt-2 mb-4">
+          <div className="mt-2 mb-4">
             <span className="font-medium">2.2. User Information:</span> When you
             sign up for an account on Suggest Solutions, we collect the
             following information:
@@ -41,12 +41,26 @@ const PrivacyPolicy = () => {
               <li>Email Address</li>
               <li>Profile Photo</li>
             </ul>
-          </p>
+          </div>
           <p className="mt-2 mb-4">
             <span className="font-medium">2.3. Data Storage:</span> The
             collected information is stored securely in our database to
             facilitate account management and user interactions on our platform.
           </p>
+          <div className="mt-2 mb-4">
+            <span className="font-medium">2.4. Expert Information:</span> When
+            you sign up for an account on Suggest Solutions, we collect the
+            following information:
+            <ul className="list-disc ml-7">
+              <li>Full Name</li>
+              <li>Country</li>
+              <li>State</li>
+              <li>City</li>
+              <li>Expert's Phone Number</li>
+              <li>Expert's Profile Photo</li>
+              <li>Expert's Description</li>
+            </ul>
+          </div>
           <h3 className="font-semibold text-lg">3. Use of Information</h3>
           <p className="mt-2 mb-4">
             <span className="font-medium">3.1. Account Management:</span> The

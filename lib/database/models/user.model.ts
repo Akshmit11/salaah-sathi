@@ -12,6 +12,8 @@ export interface IUser extends Document {
   total_problems: number;
   total_comments: number;
   saveProblems: IProblem[];
+  isExpert: boolean;
+  plan: "free" | "pro";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,6 +25,8 @@ const UserSchema: Schema<IUser> = new Schema({
   username: { type: String, required: true, unique: true, trim: true },
   email: { type: String, required: true, unique: true },
   photo: { type: String, required: true },
+  isExpert: { type: Boolean, default: false },
+  plan: { type: String, default: "free" },
   total_problems: { type: Number, default: 0 },
   total_comments: { type: Number, default: 0 },
   saveProblems: [{ type: Schema.Types.ObjectId, ref: "Problem", default: [] }],

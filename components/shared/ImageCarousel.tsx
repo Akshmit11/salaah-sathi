@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 import {
   Carousel,
@@ -6,35 +6,30 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 import Image from "next/image";
 
 const ImageCarousel = ({ data }: { data: string[] | undefined }) => {
   return (
-    <Carousel className="w-full max-w-[300px] sm:max-w-[500px] md:max-w-[700px] mx-auto">
+    <Carousel className="flex justify-center max-w-[200px] max-h-[200px] md:max-w-[700px] md:max-h-[700px] mx-auto">
       <CarouselContent>
         {data?.map((url, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <div className="border rounded-md">
-                <div className="flex aspect-square items-center justify-center p-2">
-                  <Image 
-                    src={url}
-                    alt={`image-${index}`}
-                    width={1000}
-                    height={300}
-                    className="h-full min-h-[300px] object-cover object-center rounded-md"
-                  />
-                </div>
-              </div>
-            </div>
+          <CarouselItem key={index} className="rounded-md">
+            <Image
+              src={url}
+              alt={`image-${index}`}
+              width={200}
+              height={200}
+              className="w-[200px] h-[200px] md:w-[700px] md:h-[700px] rounded-md"
+              priority
+            />
           </CarouselItem>
         ))}
       </CarouselContent>
       <CarouselPrevious className="ml-4 sm:ml-0" />
       <CarouselNext className="mr-4 sm:mr-0" />
     </Carousel>
-  )
-}
+  );
+};
 
 export default ImageCarousel;

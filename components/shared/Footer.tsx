@@ -8,10 +8,8 @@ const Footer = () => {
         <Link href="/">
           <Image src={"/img3.webp"} alt="logo" width={450} height={450} className='w-52 h-24' />
         </Link>
-
         <p className="">2024 Bonnie Foi Technology. All Rights reserved.</p>
-
-        <div>
+        <div className="flex flex-wrap gap-2 w-1/3">
           <p>
             <Link
               href={"/terms-and-conditions"}
@@ -30,11 +28,26 @@ const Footer = () => {
           </p>
           <p>
             <Link
-              href={"mailto:bonniefoitech@gmail.com"}
+              href={"/shipping-policy"}
               className="hover:underline hover:underline-offset-2 font-medium text-sm"
             >
-              Contact Us -{" "}
-              <span className="italic">bonniefoitech@gmail.com</span>
+              Shipping Policy
+            </Link>
+          </p>
+          <p>
+            <Link
+              href={"/cancellation-refund-policy"}
+              className="hover:underline hover:underline-offset-2 font-medium text-sm"
+            >
+              Cancellation / Refund Policy
+            </Link>
+          </p>
+          <p>
+            <Link
+              href={"/contact-us"}
+              className="hover:underline hover:underline-offset-2 font-medium text-sm"
+            >
+              Contact Us
             </Link>
           </p>
         </div>

@@ -17,13 +17,13 @@ export const createComment = async ({
 }: CreateCommentParams) => {
   try {
     await connectToDatabase();
-
+    
     const problem = await Problem.findById(problemId);
-
+    
     if (!problem) {
       throw new Error("Problem not found!");
     }
-
+    
     const user = await User.findOneAndUpdate(
       { clerkId: userId },
       { $inc: { total_comments: 1 } },
@@ -37,12 +37,20 @@ export const createComment = async ({
     const newComment = {
       text: comment,
       user: user._id,
+      isExpert: user.isExpert
     };
+    const update: any = {
+      $push: { comments: newComment },
+    };
+    
+    if (user.isExpert) {
+      update.$inc = { expertComments: 1 };
+    }
 
     // Add the new comment to the problem's comments array
     const updatedProblem = await Problem.findByIdAndUpdate(
       problemId,
-      { $push: { comments: newComment } },
+      update,
       { new: true } // Return the updated document
     ).populate("comments.user", "username"); // Populate the username field in comments
 

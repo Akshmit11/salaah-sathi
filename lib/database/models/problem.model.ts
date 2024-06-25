@@ -4,12 +4,14 @@ export interface IComment extends Document {
   _id: string;
   text: string;
   user: { _id: string; username: string };
+  isExpert: boolean;
   createdAt: Date;
 }
 
 const CommentSchema: Schema<IComment> = new Schema({
   text: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  isExpert: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -21,6 +23,7 @@ export interface IProblem extends Document {
   aiSolution: string;
   comments: IComment[];
   timesSaved: number;
+  expertComments: number;
   imageUrls: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -33,6 +36,7 @@ const ProblemSchema: Schema<IProblem> = new Schema({
   aiSolution: { type: String, required: true },
   comments: { type: [CommentSchema], default: [] },
   timesSaved: { type: Number, default: 0 },
+  expertComments: { type: Number, default: 0 },
   imageUrls: { type: [String] },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

@@ -13,13 +13,14 @@ type DropdownProps = {
   categories: typeof categoryEnum.Enum;
   defaultValue?: string;
   update?: boolean
+  categoryFor ?: string
 };
 
-const Dropdown = ({ value, onChangeHandler, categories, defaultValue, update }: DropdownProps) => {
+const Dropdown = ({ value, onChangeHandler, categories, defaultValue, update, categoryFor }: DropdownProps) => {
   return (
     <Select onValueChange={onChangeHandler} required defaultValue={update ? defaultValue : undefined}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder="Type of Problem" />
+        <SelectValue placeholder={`${categoryFor ? 'Specializes In' : 'Type of Problem'}`} />
       </SelectTrigger>
       <SelectContent>
         {Object.values(categories).map((category) => (
