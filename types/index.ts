@@ -1,3 +1,5 @@
+import { Schema } from "mongoose";
+
 // create user params
 export type CreateUserParams = {
   clerkId: string;
@@ -236,5 +238,35 @@ export type UpdateExpertParams = {
       | "Travel & Tourism";
   };
   userId: string;
+  path: string;
+};
+
+export type NewComment = {
+  text: string;
+  user: Schema.Types.ObjectId;
+  isExpert: boolean;
+  expert?: Schema.Types.ObjectId;
+}
+
+// create post params
+export type CreatePostParams = {
+  post: {
+    description: string;
+    fileUrls: string[] | undefined;
+  };
+  userId: string;
+  expertId: string;
+  path: string;
+};
+
+// update post
+export type UpdatePostParams = {
+  userId: string;
+  expertId: string;
+  post: {
+    _id: string;
+    description: string;
+    fileUrls: string[] | undefined;
+  };
   path: string;
 };

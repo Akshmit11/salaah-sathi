@@ -3,7 +3,7 @@ import { Schema, Document, model, models } from "mongoose";
 export interface IPost extends Document {
   _id: string;
   description: string;
-  imageUrls: string[];
+  fileUrls: string[];
   expert: { _id: string; fullName: string, category: string };
   user: { _id: string; username: string };
   createdAt: Date;
@@ -12,7 +12,7 @@ export interface IPost extends Document {
 
 const PostSchema: Schema<IPost> = new Schema({
   description: { type: String, required: true },
-  imageUrls: { type: [String] },
+  fileUrls: { type: [String] },
   expert: { type: Schema.Types.ObjectId, ref: "Expert", required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   createdAt: { type: Date, default: Date.now },

@@ -9,7 +9,7 @@ const Footer = () => {
           <Image src={"/img3.webp"} alt="logo" width={450} height={450} className='w-52 h-24' />
         </Link>
         <p className="">2024 Bonnie Foi Technology. All Rights reserved.</p>
-        <div className="flex flex-wrap gap-2 w-1/3">
+        <div className="flex flex-col md:flex-row flex-wrap gap-2 md:w-1/3">
           <p>
             <Link
               href={"/terms-and-conditions"}

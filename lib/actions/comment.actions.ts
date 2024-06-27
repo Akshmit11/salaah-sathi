@@ -1,10 +1,11 @@
 "use server";
 
-import { CreateCommentParams } from "@/types";
+import { CreateCommentParams, NewComment } from "@/types";
 import { connectToDatabase } from "../database/mongoose";
 import Problem from "../database/models/problem.model";
 import User from "../database/models/user.model";
 import { handleError } from "../utils";
+import Expert from "../database/models/expert.model";
 
 
 
@@ -34,15 +35,27 @@ export const createComment = async ({
       throw new Error("User not found!");
     }
 
-    const newComment = {
+    let newComment: NewComment = {
       text: comment,
       user: user._id,
       isExpert: user.isExpert
     };
+
+    if (user.isExpert) {
+      const expertUser = await Expert.findOne({ user: user._id });
+      if (!expertUser) {
+        throw new Error("Expert not found!");
+      }
+      newComment = {
+        ...newComment,
+        expert: expertUser._id
+      };
+    }
+
     const update: any = {
       $push: { comments: newComment },
     };
-    
+
     if (user.isExpert) {
       update.$inc = { expertComments: 1 };
     }
@@ -52,7 +65,8 @@ export const createComment = async ({
       problemId,
       update,
       { new: true } // Return the updated document
-    ).populate("comments.user", "username"); // Populate the username field in comments
+    ).populate("comments.user", "username") // Populate the username field in comments
+      .populate("comments.expert", "fullName _id"); // Populate the fullName field in comments for experts
 
     return JSON.parse(JSON.stringify(updatedProblem));
   } catch (error) {

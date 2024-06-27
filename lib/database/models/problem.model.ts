@@ -4,6 +4,7 @@ export interface IComment extends Document {
   _id: string;
   text: string;
   user: { _id: string; username: string };
+  expert?: { _id: string, fullName: string },
   isExpert: boolean;
   createdAt: Date;
 }
@@ -11,6 +12,7 @@ export interface IComment extends Document {
 const CommentSchema: Schema<IComment> = new Schema({
   text: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  expert: {type: Schema.Types.ObjectId, ref: "Expert"}, 
   isExpert: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
 });

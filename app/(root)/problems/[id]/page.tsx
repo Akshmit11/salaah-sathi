@@ -6,7 +6,9 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { IUser } from "@/lib/database/models/user.model";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { BadgeCheck } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
@@ -86,20 +88,34 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
                 {problem.comments.map((comment: any) => {
                   // Format the date as desired
                   const createdAt = new Date(comment?.createdAt);
-                  const formattedDate = createdAt.toLocaleDateString(
-                    "en-US",
-                    {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    }
-                  );
+                  const formattedDate = createdAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  });
 
                   return (
                     <div className="mb-4 border-[1px] p-2 rounded-md">
                       <p className="mb-2">{comment?.text}</p>
                       <div className="italic text-sm flex justify-between items-center">
-                        <p>~ {comment?.user?.username}</p>
+                        <div>
+                          {comment?.isExpert ? (
+                            <div className="flex gap-2 items-center">
+                              ~{" "}
+                              <Link
+                                href={`/experts/${comment?.expert?._id}`}
+                                className="hover:underline hover:underline-offset-2"
+                              >
+                                {comment?.expert?.fullName}
+                              </Link>{" "}
+                              <span>
+                                <BadgeCheck className="bg-primary" />
+                              </span>
+                            </div>
+                          ) : (
+                            <p>~ {comment?.user?.username}</p>
+                          )}
+                        </div>
                         <p>{formattedDate}</p>
                       </div>
                     </div>

@@ -11,7 +11,7 @@ import { categoryEnum } from "@/constants";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ type }: { type?: string}) => {
   const categories = categoryEnum.Enum;
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -38,10 +38,13 @@ const CategoryFilter = () => {
   return (
     <Select onValueChange={(value: string) => onSelectCategory(value)} defaultValue="All">
       <SelectTrigger className="w-full h-[54px] mb-4 lg:ml-4">
-        <SelectValue placeholder="Type of Problem" />
+        <SelectValue placeholder={`${type ? 'Category' : 'Type of Problem'}`} />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="All">Type of Problem - All</SelectItem>
+        <SelectItem value="All">
+          { type ? 'Category - All' : 'Type of Problem - All'
+          }
+        </SelectItem>
         {Object.values(categories).map((category: any) => (
           <SelectItem key={category} value={category}>
             {category}

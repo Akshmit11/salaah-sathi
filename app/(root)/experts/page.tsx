@@ -1,15 +1,28 @@
+import CategoryFilter from "@/components/shared/CategoryFilter";
+import SearchComponent from "@/components/shared/SearchComponent";
 import { Button } from "@/components/ui/button";
 import { getUserById } from "@/lib/actions/user.actions";
+import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import { ArrowBigRight, ArrowRightCircle, Check, CircleCheck, Lock } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const Experts = async () => {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in");
-  const user = await getUserById(userId);
+const Experts = async ({ searchParams }: SearchParamProps) => {
+  // const { userId } = auth();
+  // if (!userId) redirect("/sign-in");
+  // const user = await getUserById(userId);
 
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || '';
+  const category = (searchParams?.category as string) || '';
+
+  // get All Posts
+
+  const user = {
+    plan: "pro",
+    isExpert: true,
+  }
 
   const plan = user?.plan;
   const isExpert = user?.isExpert;
@@ -32,6 +45,10 @@ const Experts = async () => {
              Dashboard
           </Link>
         </Button>
+      </div>
+      <div className="w-full mt-4 flex flex-col lg:flex-row items-center">
+        <SearchComponent /> 
+        <CategoryFilter type="expert" />
       </div>
     </div>
   );

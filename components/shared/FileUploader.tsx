@@ -20,6 +20,10 @@ const FileUploader = ({
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      if (acceptedFiles.length + files.length > 4) {
+        alert("You can only upload one video.");
+        return;
+      }
       setFiles(acceptedFiles);
       setLocalFiles(acceptedFiles);
       onFieldChange(acceptedFiles.map((file) => convertFileToUrl(file)));
@@ -43,14 +47,14 @@ const FileUploader = ({
     <div className="border rounded-md flex flex-col p-2">
       <div {...getRootProps()} className="p-4 flex items-center justify-center border border-dashed">
         <input {...getInputProps()} />
-        <p>Upload any images here...</p>
+        <p>Upload any images here... (recommended 800 x 800 pixels)</p>
       </div>
 
       {imageUrls && imageUrls?.length > 0 && (
         <div className="flex gap-2 mt-4">
           {/* images are shown here */}
           {imageUrls?.map((url, index) => (
-              <div className="relative">
+              <div className="relative" key={index}>
                 <Image 
                   src={url}
                   alt="images"

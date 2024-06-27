@@ -65,6 +65,24 @@ export const getExpertById = async (expertId: string) => {
   }
 };
 
+// read single expert using userId
+export const getExpertByUserId = async (userId: string) => {
+  try {
+    await connectToDatabase();
+
+    const expert = await populateExpert(Expert.findOne({ user: userId }));
+
+    if (!expert) {
+      throw new Error("No Expert like this");
+    }
+
+    return JSON.parse(JSON.stringify(expert));
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+
 // read all experts - r
 export const getAllExperts = async ({
   query,

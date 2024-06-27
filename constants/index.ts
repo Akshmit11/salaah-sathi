@@ -73,3 +73,8 @@ export const ExpertFormDefaultValues = {
   category: categoryEnum.Enum.Agriculture, // Must match one of the enum values
   profilePhoto: "",
 };
+
+export const PostFormDefaultValues = {
+  description: "",
+  imageUrls: [],
+};

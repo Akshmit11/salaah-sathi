@@ -59,3 +59,9 @@ export const expertFormSchema = z.object({
   }),
   profilePhoto: z.string().url({ message: "Profile Photo is required" })
 });
+
+export const postFormSchema = z.object({
+  description: z.string().min(3, { message: "Description is required" }),
+  imageUrls: z.string().url().array().optional(),
+  videoUrls: z.string().url().array().optional()
+});

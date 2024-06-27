@@ -51,7 +51,7 @@ const ProblemForm = ({
         }
       : ProblemFormDefaultValues;
 
-    const { startUpload } = useUploadThing('imageUploader')
+  const { startUpload } = useUploadThing('imageUploader')
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof problemFormSchema>>({
