@@ -34,8 +34,8 @@ export const createPost = async ({
   try {
     await connectToDatabase();
 
-    const expert = await Expert.findOneAndUpdate(
-      { _id: expertId },
+    const expert = await Expert.findByIdAndUpdate(
+      expertId,
       { $inc: { totalPosts: 1 } },
       { new: true }
     );
