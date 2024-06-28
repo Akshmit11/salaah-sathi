@@ -15,7 +15,9 @@ import { redirect } from "next/navigation";
 const Experts = async ({ searchParams }: SearchParamProps) => {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
+
   const user = await getUserById(userId);
+  if (!user) redirect("/sign-in");
 
   const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || "";

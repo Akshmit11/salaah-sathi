@@ -17,7 +17,6 @@ export const categoryEnum = [
   "Legal",
   "Marketing",
   "Mental Health",
-  "Other",
   "Personal Development",
   "Personal Finance",
   "Pets",
@@ -31,6 +30,7 @@ export const categoryEnum = [
   "Technology",
   "Transportation",
   "Travel & Tourism",
+  "Other",
 ] as const;
 
 

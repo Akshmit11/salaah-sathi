@@ -4,15 +4,19 @@ import { Button } from "../ui/button";
 import { initializeRazorpay } from "@/constants";
 import { subscribePlan } from "@/lib/actions/plan.actions";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 const SubscriptionPlan = ({ userId }: { userId: string }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePayment = async () => {
+    setIsLoading(true);
     const res = await initializeRazorpay();
     if (!res) {
       alert("Razorpay SDK Failed to load");
+      setIsLoading(false);
       return;
     }
     const response = await subscribePlan();
@@ -52,6 +56,8 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
           }
         } catch (error) {
           console.log("handle response ", error);
+        } finally {
+          setIsLoading(false);
         }
       },
     };
@@ -64,6 +70,7 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
         "Payment failed. Please try again. Contact support for help ",
         response
       );
+      setIsLoading(false);
     });
   }
 
@@ -112,7 +119,9 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
           </div>
 
           <div className="mt-[25px]">
-            <Button onClick={handlePayment}>Subscribe</Button>
+            <Button onClick={handlePayment} disabled={isLoading}>
+              {isLoading ? 'Processing...' : 'Subscribe'}
+            </Button>
           </div>
         </div>
       </div>

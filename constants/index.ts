@@ -36,7 +36,6 @@ export const categoryEnum = z.enum([
   "Legal",
   "Marketing",
   "Mental Health",
-  "Other",
   "Personal Development",
   "Personal Finance",
   "Pets",
@@ -50,6 +49,7 @@ export const categoryEnum = z.enum([
   "Technology",
   "Transportation",
   "Travel & Tourism",
+  "Other",
 ]);
 export type categoryEnum = z.infer<typeof categoryEnum>;
 

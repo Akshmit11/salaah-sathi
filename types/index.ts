@@ -56,7 +56,6 @@ export type CreateProblemParams = {
       | "Legal"
       | "Marketing"
       | "Mental Health"
-      | "Other"
       | "Personal Development"
       | "Personal Finance"
       | "Pets"
@@ -69,7 +68,8 @@ export type CreateProblemParams = {
       | "Sports"
       | "Technology"
       | "Transportation"
-      | "Travel & Tourism";
+      | "Travel & Tourism"
+      | "Other";
     imageUrls: string[] | undefined;
   };
   userId: string;
@@ -167,7 +167,6 @@ export type CreateExpertParams = {
       | "Legal"
       | "Marketing"
       | "Mental Health"
-      | "Other"
       | "Personal Development"
       | "Personal Finance"
       | "Pets"
@@ -180,7 +179,8 @@ export type CreateExpertParams = {
       | "Sports"
       | "Technology"
       | "Transportation"
-      | "Travel & Tourism";
+      | "Travel & Tourism"
+      | "Other";
   };
   userId: string;
   path: string;
@@ -222,7 +222,6 @@ export type UpdateExpertParams = {
       | "Legal"
       | "Marketing"
       | "Mental Health"
-      | "Other"
       | "Personal Development"
       | "Personal Finance"
       | "Pets"
@@ -235,7 +234,8 @@ export type UpdateExpertParams = {
       | "Sports"
       | "Technology"
       | "Transportation"
-      | "Travel & Tourism";
+      | "Travel & Tourism"
+      | "Other";
   };
   userId: string;
   path: string;
