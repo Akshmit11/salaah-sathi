@@ -101,7 +101,7 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
       </section>
       {
         isCurrentUserAnExpert && (  
-          <Button className="my-4 bg-primary">
+          <Button className="my-4 bg-primary mx-4">
             <Link href={'/experts/posts/upload'} className="text-white flex items-center gap-2">
               <Plus /> New Post
             </Link>
