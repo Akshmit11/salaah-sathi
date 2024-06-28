@@ -21,13 +21,13 @@ const SubscriptionPlan = () => {
               For Experts
             </p>
             <p className="text-[#00153B] text-[50px] leading-[63px] font-bold">
-                ₹20,000
+                ₹2,000
             </p>
           </div>
 
           <div>
             <p className="text-[#717F87] text-[18px] leading-[28px] font-medium">
-              per year
+              per month
             </p>
           </div>
         </div>

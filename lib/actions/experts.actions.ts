@@ -26,8 +26,8 @@ export const createExpert = async ({
   try {
     await connectToDatabase();
 
-    const user = await User.findOneAndUpdate(
-      { clerkId: userId },
+    const user = await User.findByIdAndUpdate(
+      userId,
       { $set: { isExpert: true } },
       { new: true }
     );
@@ -81,7 +81,6 @@ export const getExpertByUserId = async (userId: string) => {
     handleError(error);
   }
 };
-
 
 // read all experts - r
 export const getAllExperts = async ({
@@ -138,7 +137,7 @@ export const updateExpert = async ({
     );
 
     if (!updatedExpert) {
-      throw new Error("Expert not found");
+      throw new Error("Expert not updated");
     }
     revalidatePath(path);
     return JSON.parse(JSON.stringify(updatedExpert));

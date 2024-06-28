@@ -1,12 +1,13 @@
 "use server";
 
-import { CreatePostParams, UpdatePostParams } from "@/types";
+import { CreatePostParams, DeletePostParams, GetAllPostParams, GetMyPostParams, UpdatePostParams } from "@/types";
 import Expert from "../database/models/expert.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import Post from "../database/models/post.model";
 import { revalidatePath } from "next/cache";
 import { handleError } from "../utils";
+import PostId from "@/app/(root)/experts/posts/[id]/page";
 
 const populatePost = async (query: any) => {
   return query.populate([
@@ -75,72 +76,72 @@ export const getPostById = async (postId: string) => {
 };
 
 // read problem - r
-// export const getAllProblems = async ({
-//   query,
-//   limit = 6,
-//   page,
-//   category,
-// }: GetAllProblemParams) => {
-//   try {
-//     await connectToDatabase();
+export const getAllPosts = async ({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllPostParams) => {
+  try {
+    await connectToDatabase();
 
-//     const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {};
-//     const categoryCondition = category ? { category: { $in: category } } : {}; // Use $in for filtering multiple categories
-//     const conditions = {
-//       $and: [titleCondition, categoryCondition],
-//     };
+    const descriptionCondition = query ? { description: { $regex: query, $options: 'i' } } : {};
+    const categoryCondition = category ? { category: { $in: category } } : {}; // Use $in for filtering multiple categories
+    const conditions = {
+      $and: [descriptionCondition, categoryCondition],
+    };
 
-//     const skipAmount = (Number(page) - 1) * limit
+    const skipAmount = (Number(page) - 1) * limit
 
-//     const problemsQuery = Problem.find(conditions)
-//       .sort({ createdAt: "desc" })
-//       .skip(skipAmount)
-//       .limit(limit);
+    const postsQuery = Post.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
 
-//     const problems = await populateProblem(problemsQuery);
-//     const problemsCount = await Problem.countDocuments(conditions);
+    const posts = await populatePost(postsQuery);
+    const postsCount = await Post.countDocuments(conditions);
 
-//     return {
-//       data: JSON.parse(JSON.stringify(problems)),
-//       totalPages: Math.ceil(problemsCount / limit),
-//     };
-//   } catch (error) {
-//     handleError(error);
-//   }
-// };
+    return {
+      data: JSON.parse(JSON.stringify(posts)),
+      totalPages: Math.ceil(postsCount / limit),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+};
 
 // read problems of a particular user
-// export const getAllMyProblems = async ({
-//   userId,
-//   limit = 6,
-//   page,
-// }: GetMyProblemParams) => {
-//   try {
-//     await connectToDatabase();
-//     const user = await User.findById(userId);
+export const getAllMyPosts = async ({
+  expertId,
+  limit = 6,
+  page,
+}: GetMyPostParams) => {
+  try {
+    await connectToDatabase();
+    const expert = await Expert.findById(expertId);
 
-//     if (!user) throw new Error("No User found");
+    if (!expert) throw new Error("No Expert found");
 
-//     const conditions = { user: userId };
+    const conditions = { expert: expertId };
 
-//     const skipAmount = (Number(page) - 1) * limit
+    const skipAmount = (Number(page) - 1) * limit
 
-//     const problemsQuery = Problem.find(conditions)
-//       .sort({ createdAt: "desc" })
-//       .skip(skipAmount)
-//       .limit(limit);
+    const postsQuery = Post.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
 
-//     const problems = await populateProblem(problemsQuery);
-//     const problemsCount = await Problem.countDocuments(conditions);
+    const posts = await populatePost(postsQuery);
+    const postsCount = await Post.countDocuments(conditions);
 
-//     return {
-//       data: JSON.parse(JSON.stringify(problems)),
-//       totalPages: Math.ceil(problemsCount / limit),
-//     };
-//   } catch (error) {
-//     handleError(error);
-//   }
-// };
+    return {
+      data: JSON.parse(JSON.stringify(posts)),
+      totalPages: Math.ceil(postsCount / limit),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+};
 
 // update post
 export const updatePost = async ({
@@ -178,29 +179,25 @@ export const updatePost = async ({
 };
 
 // delete problem - d
-// export const deleteProblem = async ({
-//   problemId,
-//   path,
-// }: DeleteProblemParams) => {
-//   try {
-//     await connectToDatabase();
+export const deletePost = async ({
+  postId,
+  path,
+}: DeletePostParams) => {
+  try {
+    await connectToDatabase();
 
-//     const deleteProblem = await Problem.findByIdAndDelete(problemId);
+    const deletePost = await Post.findByIdAndDelete(postId);
 
-//     if (deleteProblem) {
-//       await User.updateMany(
-//         { saveProblems: problemId },
-//         { $pull: { saveProblems: problemId } }
-//       );
-//       await User.findByIdAndUpdate(deleteProblem.user, {
-//         $inc: { total_problems: -1 },
-//       });
-//       revalidatePath(path);
-//     }
-//   } catch (error) {
-//     handleError(error);
-//   }
-// };
+    if (deletePost) {
+      await Expert.findByIdAndUpdate(deletePost.expert, {
+        $inc: { totalPosts: -1 },
+      });
+      revalidatePath(path);
+    }
+  } catch (error) {
+    handleError(error);
+  }
+};
 
 
 

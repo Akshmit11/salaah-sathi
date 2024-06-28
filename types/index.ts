@@ -270,3 +270,24 @@ export type UpdatePostParams = {
   };
   path: string;
 };
+
+// delete post
+export type DeletePostParams = {
+  postId: string;
+  path: string;
+};
+
+// get all posts
+export type GetMyPostParams = {
+  expertId: string;
+  limit: number;
+  page: number;
+};
+
+// get all problems
+export type GetAllPostParams = {
+  query: string;
+  category: string;
+  limit: number;
+  page: number;
+};

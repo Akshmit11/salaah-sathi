@@ -110,6 +110,7 @@ const ExpertForm = ({ userId, type, expert, expertId }: ExpertFormProps) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-5"
       >
+        {/* fullname + phonenumber */}
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
@@ -136,7 +137,8 @@ const ExpertForm = ({ userId, type, expert, expertId }: ExpertFormProps) => {
             )}
           />
         </div>
-
+  
+        {/* country + state */}
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
@@ -164,6 +166,7 @@ const ExpertForm = ({ userId, type, expert, expertId }: ExpertFormProps) => {
           />
         </div>
 
+        {/* city + category */}
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
@@ -197,7 +200,8 @@ const ExpertForm = ({ userId, type, expert, expertId }: ExpertFormProps) => {
             )}
           />
         </div>
-
+        
+        {/* description */}
         <div className="flex flex-col">
           <FormField
             control={form.control}
@@ -217,6 +221,7 @@ const ExpertForm = ({ userId, type, expert, expertId }: ExpertFormProps) => {
           />
         </div>
 
+        {/* profile photo */}
         <div className="flex flex-col w-full md:w-72 border rounded-md">
           <FormField
             control={form.control}

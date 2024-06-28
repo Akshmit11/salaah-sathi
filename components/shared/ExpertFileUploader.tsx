@@ -36,17 +36,17 @@ const ExpertFileUploader = ({ imageUrl, onFieldChange, setFiles }: ExpertFileUpl
         <div className="flex h-full w-fit flex-1 justify-center">
           <Image
             src={imageUrl}
-            alt="image"
-            width={250}
-            height={250}
+            alt="expert-profile-photo"
+            width={200}
+            height={300}
             className="object-contain object-center"
           />
         </div>
       ) : (
         <div className="flex items-center justify-center flex-col py-5">
           <File />
-          <h3 className="mb-2 mt-2">Drag or upload profile photo here</h3>
-          <p className="p-medium-12 mb-4">SVG, PNG, JPG</p>
+          <h3 className="mb-2 mt-2">Drag or upload portrait profile photo here (recommended 200 x 300 pixels)</h3>
+          <p className="p-medium-12 mb-4">PNG, JPG</p>
           <Button type="button" className="rounded-full">
             Select from device
           </Button>

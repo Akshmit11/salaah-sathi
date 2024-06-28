@@ -1,28 +1,114 @@
+import PostCollection from "@/components/shared/PostCollection";
 import { getExpertById } from "@/lib/actions/experts.actions";
+import { getAllMyPosts } from "@/lib/actions/post.actions";
+import { getUserById } from "@/lib/actions/user.actions";
+import { IUser } from "@/lib/database/models/user.model";
 import { SearchParamProps } from "@/types";
+import { auth } from "@clerk/nextjs/server";
 import { Metadata } from "next";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
-// export async function generateMetadata({
-//   params: { id },
-// }: SearchParamProps): Promise<Metadata> {
-//   const expert = await getExpertById(id);
-//   return {
-//     title: expert?.fullName,
-//     description: expert?.description
-//   };
-// }
+export async function generateMetadata({
+  params: { id },
+}: SearchParamProps): Promise<Metadata> {
+  const expert = await getExpertById(id);
+  return {
+    title: expert?.fullName,
+    description: expert?.description
+  };
+}
+let currentUser: any = null;
 
-const ExpertsId = () => {
+const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => {
+  const { userId } = auth();
+  if (userId) {
+    currentUser = (await getUserById(userId)) as IUser;
 
+    if (!currentUser) {
+      redirect("/");
+    }
+  }
 
+  const expert = await getExpertById(id);
+  if (!expert) {
+    redirect("/experts");
+  }
+
+  const page = Number(searchParams?.page) || 1;
+  const posts = await getAllMyPosts({
+    expertId: expert._id,
+    page,
+    limit: 6,
+  });
 
   return (
     <>
-      <section className="py-5 md:py-10">
-        <h1 className="text-center text-2xl font-bold sm:text-left">Expert name</h1>
+      {/* name */}
+      <section className="py-5 flex flex-col md:flex-row px-4 md:items-center gap-5">
+        <div className="mx-auto md:mx-0">
+          <Image
+            src={expert?.profilePhoto}
+            width={250}
+            height={450}
+            alt="profile photo"
+            className="w-[200px] h-[300px] object-cover rounded-md"
+          />
+        </div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <p className="text-lg font-light">Full Name</p>
+            <p className="text-2xl font-bold">{expert?.fullName}</p>
+          </div>
+          <div>
+            <p className="text-lg font-light">Phone Number</p>
+            <p className="text-2xl font-bold">{expert?.phoneNumber}</p>
+          </div>
+        </div>
+      </section>
+      {/* description */}
+      <section className="py-5 flex flex-col px-4">
+        <h1 className="text-lg font-light">About the Expert</h1>
+        <p className="text-2xl font-semibold">
+          {expert?.description}
+        </p>
+      </section>
+      {/* other */}
+      <section className="py-5 flex flex-col px-4">
+        <div className="flex flex-wrap gap-5">
+          <div className="border rounded-md p-4 w-80">
+            <h2 className="text-lg font-light">Country</h2>
+            <h1 className="text-2xl font-bold">{expert?.country}</h1>
+          </div>
+          <div className="border rounded-md p-4 w-80">
+            <h2 className="text-lg font-light">State</h2>
+            <h1 className="text-2xl font-bold">{expert?.state}</h1>
+          </div>
+          <div className="border rounded-md p-4 w-80">
+            <h2 className="text-lg font-light">City</h2>
+            <h1 className="text-2xl font-bold">{expert?.city}</h1>
+          </div>
+          <div className="border rounded-md p-4 w-80">
+            <h2 className="text-lg font-light">Category</h2>
+            <h1 className="text-2xl font-bold">{expert?.category}</h1>
+          </div>
+        </div>
+      </section>
+      {/* recent post */}
+      <section className="py-5 flex flex-col px-4">
+        <h1 className="text-lg font-light">Recent Posts</h1>
+        <PostCollection
+          data={posts?.data}
+          emptyTitle={"No Posts uploaded by the expert"}
+          emptySubtitle={"Come back later"}
+          limit={6}
+          page={page}
+          totalPages={posts?.totalPages}
+          postCollectionType={"My_Post"}
+        />
       </section>
     </>
-  )
-}
+  );
+};
 
-export default ExpertsId
+export default ExpertsId;

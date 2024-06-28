@@ -1,5 +1,9 @@
+import PostCollection from "@/components/shared/PostCollection";
 import { Button } from "@/components/ui/button";
+import { getExpertByUserId } from "@/lib/actions/experts.actions";
+import { getAllMyPosts } from "@/lib/actions/post.actions";
 import { getUserById } from "@/lib/actions/user.actions";
+import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -11,33 +15,32 @@ export const metadata: Metadata = {
     "Manage your profile, view insights, and interact with the community. Join our platform and showcase your expertise. Connect with others and provide valuable solutions in your field.",
 };
 
-const ExpertDashboard = async () => {
-  // const { userId } = auth();
-  // if (!userId) redirect("/sign-in");
+const ExpertDashboard = async ({ searchParams }: SearchParamProps) => {
+  const { userId } = auth();
+  if (!userId) redirect("/sign-in");
 
-  // const user = await getUserById(userId);
-  // if (!user) {
-  //   redirect("/");
-  // }
-
-
-  const user = {
-    plan: "pro",
-    isExpert: true,
-  };
+  const user = await getUserById(userId);
+  if (!user) {
+    redirect("/");
+  }
 
   const plan = user?.plan;
   const isExpert = user?.isExpert;
 
   if (plan === "free" || !isExpert) redirect("/experts");
 
-  // const expert = await getExpertByUserId(user._id);
-  // if (!expert) {
-  //   redirect("/");
-  // }
-  const expert = {
-    _id: "123"
+  const expert = await getExpertByUserId(user._id);
+  if (!expert) {
+    redirect("/");
   }
+
+  
+  const page = Number(searchParams?.page) || 1;
+  const posts = await getAllMyPosts({
+    expertId: expert._id,
+    page,
+    limit: 6,
+  });
 
   return (
     <>
@@ -59,8 +62,17 @@ const ExpertDashboard = async () => {
         </Button>
       </section>
 
-      <section className="w-full flex flex-col mt-4">
-        All Post Come Here.
+      <section className="w-full flex flex-col mt-8">
+        <h1 className="text-lg font-light">Your Previous Posts</h1>
+        <PostCollection
+          data={posts?.data}
+          emptyTitle={"You have uploaded no posts"}
+          emptySubtitle={"Upload to reach your audience"}
+          limit={6}
+          page={page}
+          totalPages={posts?.totalPages}
+          postCollectionType={"My_Editable_Post"}
+        />
       </section>
     </>
   );

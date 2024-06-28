@@ -13,12 +13,14 @@ export const metadata: Metadata = {
 const ExpertRegister = async () => {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
+
   const user = await getUserById(userId);
+  if (!user) redirect("/sign-in")
 
   const plan = user?.plan
   const isExpert = user?.isExpert;
 
-  if (isExpert) redirect("/experts");
+  if (isExpert || plan !== "free") redirect("/experts");
   
   return (
     <>
@@ -27,7 +29,7 @@ const ExpertRegister = async () => {
         <h1 className="text-center text-2xl font-bold sm:text-left">Upload Your Info</h1>
       </section>
       <div className="my-4 px-5 sm:p-0">
-        <ExpertForm userId={"123"} type="Upload" />
+        <ExpertForm userId={user._id} type="Upload" />
       </div>
     </>
   )

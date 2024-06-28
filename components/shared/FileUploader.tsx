@@ -47,7 +47,7 @@ const FileUploader = ({
     <div className="border rounded-md flex flex-col p-2">
       <div {...getRootProps()} className="p-4 flex items-center justify-center border border-dashed">
         <input {...getInputProps()} />
-        <p>Upload any images here... (recommended 800 x 800 pixels)</p>
+        <p>Upload any images here... (recommended 750 x 350 pixels)</p>
       </div>
 
       {imageUrls && imageUrls?.length > 0 && (
@@ -58,8 +58,8 @@ const FileUploader = ({
                 <Image 
                   src={url}
                   alt="images"
-                  width={100}
-                  height={100}
+                  width={150}
+                  height={70}
                   className="contain-size"
                 />
                 <div className="absolute cursor-pointer bg-red-400 -top-2 -right-2 p-2 rounded-full shadow-md" onClick={() => removeFile(index)}>
