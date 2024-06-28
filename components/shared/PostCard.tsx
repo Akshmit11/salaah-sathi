@@ -11,7 +11,11 @@ type PostCardProps = {
   currentExpertId?: string;
 };
 
-const PostCard = ({ post, postCollectionType, currentExpertId }: PostCardProps) => {
+const PostCard = ({
+  post,
+  postCollectionType,
+  currentExpertId,
+}: PostCardProps) => {
   const createdAt = new Date(post?.createdAt);
 
   // Format the date as desired
@@ -36,13 +40,14 @@ const PostCard = ({ post, postCollectionType, currentExpertId }: PostCardProps) 
           </span>
         </div>
       </div>
-      <div className="py-4 text-sm">
-        {post?.description}
-      </div>
 
-      {post?.fileUrls.length > 0 && (
-            <PostCarousel data={post?.fileUrls} />
-          )}
+      <Link href={`/experts/${post?.expert?._id}`} className="text-primary hover:underline hover:underline-offset-2">
+        View Profile
+      </Link>
+
+      <div className="py-4 text-sm">{post?.description}</div>
+
+      {post?.fileUrls.length > 0 && <PostCarousel data={post?.fileUrls} />}
 
       {postCollectionType === "My_Editable_Post" && (
         <>

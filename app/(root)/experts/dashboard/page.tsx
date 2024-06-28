@@ -60,6 +60,11 @@ const ExpertDashboard = async ({ searchParams }: SearchParamProps) => {
             New Post
           </Link>
         </Button>
+        <Button className="w-full md:w-52">
+          <Link href={`/experts/${expert._id}`}>
+            View Profile
+          </Link>
+        </Button>
       </section>
 
       <section className="w-full flex flex-col mt-8">
