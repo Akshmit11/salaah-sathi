@@ -7,11 +7,7 @@ import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import {
-  ArrowBigRight,
-  ArrowRightCircle,
-  Check,
-  CircleCheck,
-  Lock,
+  CircleCheck
 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";

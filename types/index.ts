@@ -291,3 +291,10 @@ export type GetAllPostParams = {
   limit: number;
   page: number;
 };
+
+// create payment
+export type CreatePaymentParams = {
+  userId: string;
+  razorpayId: string;
+  razorpaySubscriptionId: string;
+}

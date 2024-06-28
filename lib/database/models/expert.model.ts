@@ -45,7 +45,7 @@ const ExpertSchema: Schema<IExpert> = new Schema({
   city: { type: String, required: true },
   profilePhoto: { type: String, required: true },
   ratings: { type: Number, default: 5 },
-  numberOfRatings: { type: Number, default: 1 },
+  numberOfRatings: { type: Number, default: 0 },
   numberOfProblemsCommented: { type: Number, default: 0 },
   totalPosts: { type: Number, default: 0 },
   userContacted: { type: [UserContactedSchema], default: [] },

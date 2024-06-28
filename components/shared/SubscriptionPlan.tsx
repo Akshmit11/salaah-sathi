@@ -1,8 +1,71 @@
-import { auth } from "@clerk/nextjs/server";
-import { Button } from "../ui/button";
-import { redirect } from "next/navigation";
+"use client";
 
-const SubscriptionPlan = () => {
+import { Button } from "../ui/button";
+import { initializeRazorpay } from "@/constants";
+import { subscribePlan } from "@/lib/actions/plan.actions";
+import { useRouter } from "next/navigation";
+
+
+const SubscriptionPlan = ({ userId }: { userId: string }) => {
+  const router = useRouter();
+
+  const handlePayment = async () => {
+    const res = await initializeRazorpay();
+    if (!res) {
+      alert("Razorpay SDK Failed to load");
+      return;
+    }
+    const response = await subscribePlan();
+    const options = {
+      key: response.key,
+      subscription_id: response.data,
+      name: "Suggest Solutions",
+      handler: async function (r: any) {
+        try {
+          const handleData = await fetch(
+            "https://suggestsolutions.com/api/paymentverify",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId,
+                razorpay_payment_id: r.razorpay_payment_id,
+                razorpay_subscription_id: r.razorpay_subscription_id,
+                razorpay_signature: r.razorpay_signature,
+              }),
+            }
+          );
+
+          if (!handleData.ok) {
+            throw new Error(
+              `Server error in handler function sending response: ${handleData.statusText}`
+            );
+          }
+
+          const handleResponse = await handleData.json();
+          if (handleResponse?.message === "success") {
+            router.push("https://suggestsolutions.com/experts");
+          } else {
+            router.push("https://suggestsolutions.com/payment-failed");
+          }
+        } catch (error) {
+          console.log("handle response ", error);
+        }
+      },
+    };
+
+    const paymentObject = new (window as any).Razorpay(options);
+    paymentObject.open();
+    
+    paymentObject.on("payment.failed", function (response: any) {
+      console.log(
+        "Payment failed. Please try again. Contact support for help ",
+        response
+      );
+    });
+  }
 
   return (
     <div className="flex px-4 sm:px-0">
@@ -21,7 +84,7 @@ const SubscriptionPlan = () => {
               For Experts
             </p>
             <p className="text-[#00153B] text-[50px] leading-[63px] font-bold">
-                ₹2,000
+              ₹2,000
             </p>
           </div>
 
@@ -49,9 +112,7 @@ const SubscriptionPlan = () => {
           </div>
 
           <div className="mt-[25px]">
-            <Button>
-                Continue
-            </Button>
+            <Button onClick={handlePayment}>Subscribe</Button>
           </div>
         </div>
       </div>
