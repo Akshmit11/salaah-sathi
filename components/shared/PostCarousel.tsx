@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
-const ImageCarousel = ({ data }: { data: string[] | undefined }) => {
+const PostCarousel = ({ data }: { data: string[] | undefined }) => {
   let videoExt: any = "mp4";
   const getFileExtension = (url: string) => {
     return url?.split(/[#?]/)[0]?.split(".")?.pop()?.trim();
@@ -63,4 +63,4 @@ const ImageCarousel = ({ data }: { data: string[] | undefined }) => {
   );
 };
 
-export default ImageCarousel;
+export default PostCarousel;

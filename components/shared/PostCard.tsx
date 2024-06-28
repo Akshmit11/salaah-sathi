@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Pencil } from "lucide-react";
 import { DeletePostConfirmation } from "./DeletePostConfirmation";
+import PostCarousel from "./PostCarousel";
 
 type PostCardProps = {
   post: IPost;
@@ -38,6 +39,10 @@ const PostCard = ({ post, postCollectionType, currentExpertId }: PostCardProps) 
       <div className="py-4 text-sm">
         {post?.description}
       </div>
+
+      {post?.fileUrls.length > 0 && (
+            <PostCarousel data={post?.fileUrls} />
+          )}
 
       {postCollectionType === "My_Editable_Post" && (
         <>

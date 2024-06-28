@@ -45,8 +45,8 @@ const ExpertFileUploader = ({ imageUrl, onFieldChange, setFiles }: ExpertFileUpl
       ) : (
         <div className="flex items-center justify-center flex-col py-5">
           <File />
-          <h3 className="mb-2 mt-2">Drag or upload portrait profile photo here (recommended 200 x 300 pixels)</h3>
-          <p className="p-medium-12 mb-4">PNG, JPG</p>
+          <h3 className="mb-2 mt-2 p-2">Drag or upload portrait profile photo here (recommended 200 x 300 pixels)</h3>
+          <p className="mb-4">PNG, JPG</p>
           <Button type="button" className="rounded-full">
             Select from device
           </Button>

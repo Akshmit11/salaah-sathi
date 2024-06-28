@@ -1,12 +1,15 @@
 import PostCollection from "@/components/shared/PostCollection";
+import { Button } from "@/components/ui/button";
 import { getExpertById } from "@/lib/actions/experts.actions";
 import { getAllMyPosts } from "@/lib/actions/post.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { IUser } from "@/lib/database/models/user.model";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Plus } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
@@ -41,6 +44,8 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
     page,
     limit: 6,
   });
+
+  const isCurrentUserAnExpert = (expert?.user?._id === currentUser?._id);
 
   return (
     <>
@@ -94,6 +99,15 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
           </div>
         </div>
       </section>
+      {
+        isCurrentUserAnExpert && (  
+          <Button className="my-4 bg-primary">
+            <Link href={'/experts/posts/upload'} className="text-white flex items-center gap-2">
+              <Plus /> New Post
+            </Link>
+          </Button>
+        )
+      }
       {/* recent post */}
       <section className="py-5 flex flex-col px-4">
         <h1 className="text-lg font-light">Recent Posts</h1>

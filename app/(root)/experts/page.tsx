@@ -75,15 +75,17 @@ const Experts = async ({ searchParams }: SearchParamProps) => {
         <SearchComponent />
         <CategoryFilter type="expert" />
       </div>
-      <PostCollection
-        data={posts?.data}
-        emptyTitle={"No Posts uploaded by the experts"}
-        emptySubtitle={"Coming Soon"}
-        limit={6}
-        page={page}
-        totalPages={posts?.totalPages}
-        postCollectionType={"All_Post"}
-      />
+      <div className="mt-4 w-full mx-auto">
+        <PostCollection
+          data={posts?.data}
+          emptyTitle={"No Posts uploaded by the experts"}
+          emptySubtitle={"Coming Soon"}
+          limit={6}
+          page={page}
+          totalPages={posts?.totalPages}
+          postCollectionType={"All_Post"}
+        />
+      </div>
     </div>
   );
 };
