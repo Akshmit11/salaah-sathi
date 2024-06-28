@@ -20,7 +20,8 @@ const ExpertRegister = async () => {
   const plan = user?.plan
   const isExpert = user?.isExpert;
 
-  if (isExpert || plan !== "free") redirect("/experts");
+  if (isExpert || plan === "free") redirect("/experts");
+
   
   return (
     <>
