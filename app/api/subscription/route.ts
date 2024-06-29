@@ -8,7 +8,7 @@ const instance = new Razorpay({
 
 export async function POST(req: Request) {
 
-  let plan_id = process.env.NEXT_PUBLIC_RAZORPAY_BUILDER_PLAN_ID!;
+  let plan_id = process.env.NEXT_PUBLIC_RAZORPAY_EXPERT_PLAN_ID!;
   // Check if plan_id is set
   if (!plan_id) {
     return NextResponse.json({ error: "Plan ID is not set in environment variables" }, { status: 500 });

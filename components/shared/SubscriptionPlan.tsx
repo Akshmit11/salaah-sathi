@@ -135,6 +135,9 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
             <p className="text-[#717F87] text-[14px] leading-[24px] font-medium">
               Build a global network
             </p>
+            <p className="text-[#717F87] text-[14px] leading-[24px] font-medium">
+              Help millions with your expertise
+            </p>
           </div>
 
           <div className="mt-[25px]">
