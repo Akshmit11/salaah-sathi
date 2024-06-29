@@ -60,6 +60,12 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
           setIsLoading(false);
         }
       },
+      modal: {
+        ondismiss: function () {
+          setIsLoading(false);
+          console.log("Payment modal closed");
+        },
+      },
     };
 
     const paymentObject = new (window as any).Razorpay(options);
