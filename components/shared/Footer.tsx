@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="border-t border-r-0 border-l-0 border-b-0">
       <div className="space-y-4 md:space-y-0 md:space-x-3 md:flex md:justify-between py-6 px-5 sm:px-10 max-w-7xl lg:mx-auto w-full items-center">
         <Link href="/">
-          <Image src={"/img3.webp"} alt="logo" width={450} height={450} className='w-52 h-24' />
+        <Image src={`https://utfs.io/f/f2ce5085-9339-47da-a5c7-5ce33138a86e-1xcy8.webp`} alt="logo" width={1000} height={1000} className='w-52 h-24 object-contain object-center' priority />
         </Link>
         <p className="">2024 Bonnie Foi Technology. All Rights reserved.</p>
         <div className="flex flex-col md:flex-row flex-wrap gap-2 md:w-1/3">

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React from "react";
+import AdCarousel from "./AdCarousel";
 
 const Ad = () => {
   return (
     <section className="my-4 w-full border-[1px] rounded-xl p-4">
-      <div className="flex flex-col gap-4 lg:flex-row">
+      <div className="flex flex-col gap-4 lg:flex-row items-center ">
         <div className="flex flex-col justify-center gap-8">
           <h1 className="text-2xl font-bold underline underline-offset-4">
             Empowering Solutions for Everyone
@@ -16,13 +17,7 @@ const Ad = () => {
             Together, we make life's challenges easier to overcome.
           </p>
         </div>
-        <Image
-          src="/images/img1.webp"
-          alt="hero"
-          width={1000}
-          height={1000}
-          className="rounded-lg object-contain object-center lg:w-1/2"
-        />
+        <AdCarousel />
       </div>
     </section>
   );
