@@ -11,7 +11,7 @@ import { categoryEnum } from "@/constants";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const CategoryFilter = ({ type }: { type?: string}) => {
+const CategoryFilter = ({ type }: { type?: string }) => {
   const categories = categoryEnum.Enum;
   const router = useRouter();
   const searchParams = useSearchParams();

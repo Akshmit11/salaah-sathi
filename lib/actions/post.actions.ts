@@ -86,10 +86,11 @@ export const getAllPosts = async ({
     await connectToDatabase();
 
     const descriptionCondition = query ? { description: { $regex: query, $options: 'i' } } : {};
-    const categoryCondition = category ? { category: { $in: category } } : {}; // Use $in for filtering multiple categories
+    const categoryCondition = category ? { 'expert.category': { $in: Array.isArray(category) ? category : [category] } } : {}; // Ensure category is an array
     const conditions = {
       $and: [descriptionCondition, categoryCondition],
     };
+
 
     const skipAmount = (Number(page) - 1) * limit
 

@@ -26,16 +26,16 @@ const PostCard = ({
   });
 
   return (
-    <div className="bg-gray-200 mt-4 rounded w-4/5 p-4 shadow-md">
+    <div className="bg-gray-200 mt-4 rounded w-4/5 p-4 shadow-sm mx-auto">
       <div className="flex">
         <div className="w-2/3">
           <h1 className="font-semibold">{post?.expert?.fullName}</h1>
-          <span className="block text-xs uppercase text-blue-400">
+          <span className="block text-xs uppercase text-primary">
             {formattedDate}
           </span>
         </div>
         <div className="w-1/3">
-          <span className="float-right text-xs bg-blue-400 rounded px-2 py-1 text-white">
+          <span className="float-right text-xs bg-primary rounded px-2 py-1 text-white">
             {post?.expert?.category}
           </span>
         </div>

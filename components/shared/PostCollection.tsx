@@ -34,7 +34,7 @@ const PostCollection = ({
     <>
       {data.length > 0 ? (
         <>
-          <div className="w-full flex flex-col gap-4 mx-auto">
+          <div className="w-full flex flex-col gap-4">
             {data.map((post, index) => {
               return (
                 <div key={post._id}>

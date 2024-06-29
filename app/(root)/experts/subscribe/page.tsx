@@ -18,6 +18,7 @@ const Subscribe = async () => {
   const plan = user?.plan;
   if (plan !== "free") redirect("/experts");
 
+
   return (
     <>
       <section className="py-5 md:py-10">

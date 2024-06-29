@@ -76,7 +76,7 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
 
   return (
     <div className="flex px-4 sm:px-0">
-      <div className="w-full md:w-1/3 bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+      <div className="w-full lg:w-2/5 bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
         <div className="pt-[15px] px-[25px] pb-[25px]">
           <div className="flex justify-end">
             <div className="bg-[#F6F6F7] rounded-[20px] flex justify-center align-center px-[12px]">
@@ -100,6 +100,19 @@ const SubscriptionPlan = ({ userId }: { userId: string }) => {
               per month
             </p>
           </div>
+        </div>
+
+        <hr />
+
+        <div className="pt-[15px] px-[25px] pb-[25px] flex items-center justify-between">
+          <div>
+            <h1 className="line-through text-lg font-light">Rs. 24000 / year</h1>
+            <h1 className="text-2xl font-bold text-primary">Rs. 20000 / year</h1>
+          </div>
+          <div className="px-4 py-2 bg-primary text-white rounded-full">
+            16% OFF
+          </div>
+          
         </div>
 
         <div className="pt-[25px] px-[25px] pb-[35px]">
