@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Pencil } from "lucide-react";
 import { DeletePostConfirmation } from "./DeletePostConfirmation";
 import PostCarousel from "./PostCarousel";
+import Image from "next/image";
 
 type PostCardProps = {
   post: IPost;
@@ -26,13 +27,25 @@ const PostCard = ({
   });
 
   return (
-    <div className="bg-gray-200 mt-4 rounded w-4/5 p-4 shadow-sm mx-auto">
-      <div className="flex">
-        <div className="w-2/3">
-          <h1 className="font-semibold">{post?.expert?.fullName}</h1>
-          <span className="block text-xs uppercase text-primary">
-            {formattedDate}
-          </span>
+    <div className="bg-primary-100 mt-4 rounded w-4/5 p-4 shadow-sm mx-auto">
+      <div className="flex mb-2">
+        <div className="w-2/3 flex items-center gap-2">
+          <div>
+            <Image 
+              src={post?.expert?.profilePhoto}
+              alt="expert-profile-photo"
+              width={50}
+              height={50}
+              className="rounded-full object-contain bg-primary-100"
+            />
+          </div>
+          <div>
+            <h1 className="font-semibold">{post?.expert?.fullName}</h1>
+            <span className="block text-xs uppercase text-primary">
+              {formattedDate}
+            </span>
+
+          </div>
         </div>
         <div className="w-1/3">
           <span className="float-right text-xs bg-primary rounded px-2 py-1 text-white">
@@ -41,11 +54,11 @@ const PostCard = ({
         </div>
       </div>
 
-      <Link href={`/experts/${post?.expert?._id}`} className="text-primary hover:underline hover:underline-offset-2">
+      <Link href={`/experts/${post?.expert?._id}`} className="text-primary hover:underline hover:underline-offset-2 text-sm font-light">
         View Profile
       </Link>
 
-      <div className="py-4 text-sm">{post?.description}</div>
+      <div className="pb-4 text-lg font-light">{post?.description}</div>
 
       {post?.fileUrls.length > 0 && <PostCarousel data={post?.fileUrls} />}
 

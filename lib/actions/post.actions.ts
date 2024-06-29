@@ -19,7 +19,7 @@ const populatePost = async (query: any) => {
     {
       path: "expert",
       model: Expert,
-      select: "_id fullName category",
+      select: "_id fullName category profilePhoto",
     },
   ]);
 };

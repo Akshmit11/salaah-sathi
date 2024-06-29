@@ -20,7 +20,7 @@ const ImageCarousel = ({ data }: { data: string[] | undefined }) => {
               alt={`image-${index}`}
               width={200}
               height={200}
-              className="w-[280px] h-[180px] md:w-[700px] md:h-[350px] rounded-md"
+              className="w-[280px] h-[180px] md:w-[700px] md:h-[350px] object-contain bg-primary-100 rounded-md"
               priority
             />
           </CarouselItem>

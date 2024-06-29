@@ -4,7 +4,7 @@ export interface IPost extends Document {
   _id: string;
   description: string;
   fileUrls: string[];
-  expert: { _id: string; fullName: string, category: string };
+  expert: { _id: string; fullName: string, category: string, profilePhoto: string };
   user: { _id: string; username: string };
   createdAt: Date;
   updatedAt: Date;

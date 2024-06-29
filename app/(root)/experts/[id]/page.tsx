@@ -57,7 +57,7 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
             width={250}
             height={450}
             alt="profile photo"
-            className="w-[200px] h-[300px] object-cover rounded-md"
+            className="w-[200px] h-[300px] object-contain bg-primary-100 rounded-md"
           />
         </div>
         <div className="flex flex-col gap-4">
