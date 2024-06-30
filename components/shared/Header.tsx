@@ -8,10 +8,10 @@ import NavItems from './NavItems'
 
 const Header = () => {
   return (
-    <header className="flex justify-between p-2 px-5 sm:px-10 shadow-sm fixed top-0 z-10 max-w-7xl lg:mx-auto w-full bg-white">
+    <header className="flex justify-between p-2 px-5 sm:px-10 border-b fixed top-0 z-10 max-w-7xl lg:mx-auto w-full bg-primary-50">
       <div className="flex gap-10 items-center">
         <Link href={'/'} className="cursor-pointer">
-          <Image src={`/img3.webp`} alt="logo" width={1000} height={1000} className='w-52 h-24 object-contain object-center' priority />
+          <Image src={`/img4.png`} alt="logo" width={1000} height={1000} className='w-52 h-24 object-cover object-center' priority />
         </Link>
         <NavItems />
       </div>

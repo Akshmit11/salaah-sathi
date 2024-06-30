@@ -4,7 +4,7 @@ import AdCarousel from "./AdCarousel";
 
 const Ad = () => {
   return (
-    <section className="my-4 w-full border-[1px] rounded-xl p-4">
+    <section className="my-4 w-full border-[1px] rounded-xl p-4 bg-white shadow-sm">
       <div className="flex flex-col gap-4 lg:flex-row items-center ">
         <div className="flex flex-col justify-center gap-8">
           <h1 className="text-2xl font-bold underline underline-offset-4">

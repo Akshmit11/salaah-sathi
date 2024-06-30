@@ -3,6 +3,7 @@ import CategoryFilter from "@/components/shared/CategoryFilter";
 import Collection from "@/components/shared/Collection";
 import SearchComponent from "@/components/shared/SearchComponent";
 import { Button } from "@/components/ui/button";
+import { fetchAllProblem } from "@/lib/actions/infiniteScroll.actions";
 import { getAllProblems } from "@/lib/actions/problem.actions";
 import { SearchParamProps } from "@/types";
 import { Plus } from "lucide-react";
@@ -10,15 +11,10 @@ import Link from "next/link";
 
 export default async function Home({ searchParams }: SearchParamProps) {
 
-  const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || '';
   const category = (searchParams?.category as string) || '';
-  const problems = await getAllProblems({
-    query: searchText,
-    category,
-    page,
-    limit: 6
-  });
+
+  const data = await fetchAllProblem({ query: searchText, category });
 
 
   return (
@@ -35,13 +31,12 @@ export default async function Home({ searchParams }: SearchParamProps) {
         <CategoryFilter />
       </div>
       <Collection
-        data={problems?.data}
+        initialData={data}
         emptyTitle={"No Problems Found"}
         emptySubtitle={"Come back later"}
-        limit={6}
-        page={page}
-        totalPages={problems?.totalPages}
         collectionType={"All_Problems"}
+        searchText={searchText}
+        category={category}
       />
     </main>
   );

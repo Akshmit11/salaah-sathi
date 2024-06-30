@@ -191,7 +191,7 @@ export const getAllMyProblems = async ({
 export const getAllSavedProblems = async ({
   userId,
   limit = 6,
-  page,
+  page = 1,
 }: GetSavedProblemParams) => {
   try {
     await connectToDatabase();
@@ -224,10 +224,10 @@ export const getAllSavedProblems = async ({
 
 // read all trending problems
 export const getAllTrendingProblems = async ({
-  query,
+  query = "",
   limit = 6,
-  page,
-  category,
+  page = 1,
+  category = "",
 }: GetTrendingProblemParams) => {
   try {
     await connectToDatabase();

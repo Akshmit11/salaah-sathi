@@ -1,5 +1,6 @@
 import Ad from "@/components/shared/Ad";
 import Collection from "@/components/shared/Collection";
+import { fetchAllSavedProblem } from "@/lib/actions/infiniteScroll.actions";
 import { getAllSavedProblems } from "@/lib/actions/problem.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
@@ -8,9 +9,10 @@ import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: 'Saved Problem',
-  description: 'Access and review the problems you have saved for later. Keep track of issues that are important to you and revisit them at any time.',
-}
+  title: "Saved Problem",
+  description:
+    "Access and review the problems you have saved for later. Keep track of issues that are important to you and revisit them at any time.",
+};
 
 const SaveProblemsPage = async ({ searchParams }: SearchParamProps) => {
   const { userId } = auth();
@@ -24,26 +26,25 @@ const SaveProblemsPage = async ({ searchParams }: SearchParamProps) => {
     redirect("/");
   }
 
-  const page = Number(searchParams?.page) || 1;
-  const problems = await getAllSavedProblems({
-    userId: currentUser._id,
-    page,
-    limit: 6,
-  });
+  const data = await fetchAllSavedProblem({ userId: currentUser._id });
 
   return (
-    <main className="px-4 sm:px-0">
-      <Collection
-        data={problems?.data}
-        emptyTitle={"You haved no saved problems"}
-        emptySubtitle={"Save one if you find it interesting"}
-        limit={6}
-        page={page}
-        totalPages={problems?.totalPages}
-        currentUserId={currentUser._id}
-        collectionType={"Saved_Problems"}
-      />
-    </main>
+    <>
+      <section className="py-5 md:py-10">
+        <h1 className="text-center text-2xl font-bold sm:text-left">
+          Saved Problems
+        </h1>
+      </section>
+      <main className="px-4 sm:px-0">
+        <Collection
+          initialData={data}
+          emptyTitle={"You haved no saved problems"}
+          emptySubtitle={"Save one if you find it interesting"}
+          currentUserId={currentUser._id}
+          collectionType={"Saved_Problems"}
+        />
+      </main>
+    </>
   );
 };
 

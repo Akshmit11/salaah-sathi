@@ -23,7 +23,7 @@ const Card = ({ problem, collectionType, currentUserId }: CardProps) => {
   });
 
   return (
-    <div className={`border-[1px] border-gray-300 rounded-lg transition-all hover:shadow-xl hover:-m-2 ${collectionType === "My_Problems" ? 'h-56' : 'h-48'}`}>
+    <div className={`border-[1px] border-gray-300 rounded-lg transition-all hover:shadow-xl hover:-m-2 ${collectionType === "My_Problems" ? 'h-56' : 'h-48'} bg-white`}>
       <Link href={`/problems/${problem._id}`} className="">
         <div className="p-4">
           <h1 className="text-lg font-medium line-clamp-2">{problem.title}</h1>

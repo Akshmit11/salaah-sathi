@@ -59,7 +59,7 @@ export default function RootLayout({
             ></script>
           )}
         </head>
-        <body className={inter.className}>{children}</body>
+        <body className={`${inter.className} bg-primary-50`}>{children}</body>
 
         {process.env.NODE_ENV === "production" && (
           <GoogleTagManager gtmId="AW-372101184" />

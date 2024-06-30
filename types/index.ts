@@ -102,16 +102,16 @@ export type GetMyProblemParams = {
 // get all saved problems
 export type GetSavedProblemParams = {
   userId: string;
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
 };
 
 // get all trending problems
 export type GetTrendingProblemParams = {
-  query: string;
-  category: string;
-  limit: number;
-  page: number;
+  query?: string;
+  category?: string;
+  limit?: number;
+  page?: number;
 };
 
 // delete problem
@@ -298,3 +298,26 @@ export type CreatePaymentParams = {
   razorpayId: string;
   razorpaySubscriptionId: string;
 }
+
+// fetch infinite scrolling problems
+export type FetchAllProblemParams = {
+  query?: string;
+  category?: string;
+  limit?: number;
+  page?: number;
+};
+
+// fetch infinite scrolling my problems
+export type FetchAllMyProblemParams = {
+  userId: string;
+  limit?: number;
+  page?: number;
+};
+
+// fetch all trending problems
+export type FetchTrendingProblemParams = {
+  query: string;
+  category: string;
+  limit: number;
+  page: number;
+};

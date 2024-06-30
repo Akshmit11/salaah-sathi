@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Select,
@@ -10,40 +10,49 @@ import {
 import { categoryEnum } from "@/constants";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const CategoryFilter = ({ type }: { type?: string }) => {
   const categories = categoryEnum.Enum;
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const currentCategory = searchParams.get("category") || "All";
+    setSelectedCategory(currentCategory);
+  }, [searchParams]);
 
   const onSelectCategory = (category: string) => {
-      let newUrl = '';
+    let newUrl = "";
 
-      if(category && category !== 'All') {
-        newUrl = formUrlQuery({
-          params: searchParams.toString(),
-          key: 'category',
-          value: category
-        })
-      } else {
-        newUrl = removeKeysFromQuery({
-          params: searchParams.toString(),
-          keysToRemove: ['category']
-        })
-      }
+    if (category && category !== "All") {
+      newUrl = formUrlQuery({
+        params: searchParams.toString(),
+        key: "category",
+        value: category,
+      });
+    } else {
+      newUrl = removeKeysFromQuery({
+        params: searchParams.toString(),
+        keysToRemove: ["category"],
+      });
+    }
 
-      router.push(newUrl, { scroll: false });
-  }
+    router.push(newUrl, { scroll: false });
+  };
 
   return (
-    <Select onValueChange={(value: string) => onSelectCategory(value)} defaultValue="All">
+    <Select
+      onValueChange={(value: string) => onSelectCategory(value)}
+      value={selectedCategory}
+    >
       <SelectTrigger className="w-full h-[54px] mb-4 lg:ml-4">
-        <SelectValue placeholder={`${type ? 'Category' : 'Type of Problem'}`} />
+        <SelectValue placeholder={`${type ? "Category" : "Type of Problem"}`} />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="All">
-          { type ? 'Category - All' : 'Type of Problem - All'
-          }
+          {type ? "Category - All" : "Type of Problem - All"}
         </SelectItem>
         {Object.values(categories).map((category: any) => (
           <SelectItem key={category} value={category}>
