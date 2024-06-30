@@ -1,16 +1,21 @@
+'use client'
+
 import PostCard from "./PostCard";
 import Pagination from "./Pagination";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { IPost } from "@/lib/database/models/post.model";
+import { fetchAllPosts } from "@/lib/actions/infiniteScroll.actions";
+import Image from "next/image";
 
 type PostCollectionProps = {
-  data: IPost[];
+  initialData: IPost[];
   emptyTitle: string;
   emptySubtitle: string;
-  limit: number;
-  page: number | string;
-  totalPages?: number;
   urlParamName?: string;
   currentExpertId?: string;
+  searchText?: string;
+  category?: string;
   postCollectionType:
     | "All_Post"
     | "My_Post"
@@ -18,17 +23,43 @@ type PostCollectionProps = {
 };
 
 const PostCollection = ({
-  data,
+  initialData,
   emptyTitle,
   emptySubtitle,
-  limit,
-  page,
-  totalPages = 0,
   urlParamName,
   currentExpertId,
+  searchText,
+  category,
   postCollectionType,
 }: PostCollectionProps) => {
+  const { ref, inView } = useInView();
+  const [data, setData] = useState<IPost[]>(initialData);
+  const [page, setPage] = useState(1);
+  const [hasMorePosts, setHasMorePosts] = useState(true);
 
+  async function loadMorePosts() {
+    const next = page + 1;
+    const posts = await fetchAllPosts({ page: next, query: searchText, category });
+    if (posts?.length) {
+      setPage(next);
+      setData((prev: IPost[]) => [...prev, ...posts]);
+    } else {
+      setHasMorePosts(false);
+    }
+  }
+
+  useEffect(() => {
+    // Reset data and page number when searchText or category changes
+    setData(initialData);
+    setPage(1);
+    setHasMorePosts(true); // Reset hasMorePosts
+  }, [initialData]);
+
+  useEffect(() => {
+    if (inView && hasMorePosts) {
+      loadMorePosts();
+    }
+  }, [inView, hasMorePosts]);
 
   return (
     <>
@@ -47,13 +78,22 @@ const PostCollection = ({
               );
             })}
           </div>
-          {totalPages > 1 && (
-            <Pagination
-              urlParamName={urlParamName}
-              page={page}
-              totalPages={totalPages}
-            />
-          )}
+          <div className="h-8" />
+          <section className="flex justify-center items-center w-full">
+            {hasMorePosts ? (
+              <div ref={ref}>
+                <Image
+                  src="/images/loader.svg"
+                  alt="spinner"
+                  width={56}
+                  height={56}
+                  className="object-contain"
+                />
+              </div>
+            ) : (
+              <p className="text-gray-500">You have reached the end</p>
+            )}
+          </section>
         </>
       ) : (
         <div className="flex items-center justify-center max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full min-h-[200px] flex-col gap-3 rounded-[14px] bg-gray-200 py-28 text-center">

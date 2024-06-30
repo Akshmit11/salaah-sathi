@@ -1,6 +1,7 @@
 import PostCollection from "@/components/shared/PostCollection";
 import { Button } from "@/components/ui/button";
 import { getExpertById } from "@/lib/actions/experts.actions";
+import { fetchAllMyPosts } from "@/lib/actions/infiniteScroll.actions";
 import { getAllMyPosts } from "@/lib/actions/post.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { IUser } from "@/lib/database/models/user.model";
@@ -37,13 +38,8 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
   if (!expert) {
     redirect("/experts");
   }
+  const data = await fetchAllMyPosts({ expertId: expert._id });
 
-  const page = Number(searchParams?.page) || 1;
-  const posts = await getAllMyPosts({
-    expertId: expert._id,
-    page,
-    limit: 6,
-  });
 
   const isCurrentUserAnExpert = (expert?.user?._id === currentUser?._id);
 
@@ -112,12 +108,9 @@ const ExpertsId = async ({ params: { id }, searchParams }: SearchParamProps) => 
       <section className="py-5 flex flex-col px-4">
         <h1 className="text-lg font-light">Recent Posts</h1>
         <PostCollection
-          data={posts?.data}
+          initialData={data}
           emptyTitle={"No Posts uploaded by the expert"}
           emptySubtitle={"Come back later"}
-          limit={6}
-          page={page}
-          totalPages={posts?.totalPages}
           postCollectionType={"My_Post"}
         />
       </section>

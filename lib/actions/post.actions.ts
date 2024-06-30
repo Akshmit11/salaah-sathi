@@ -24,7 +24,7 @@ const populatePost = async (query: any) => {
   ]);
 };
 
-// create problem - C
+// create post - C
 export const createPost = async ({
   post,
   expertId,
@@ -58,7 +58,7 @@ export const createPost = async ({
   }
 };
 
-// read single problem
+// read single post
 export const getPostById = async (postId: string) => {
   try {
     await connectToDatabase();
@@ -75,12 +75,12 @@ export const getPostById = async (postId: string) => {
   }
 };
 
-// read problem - r
+// read post - r
 export const getAllPosts = async ({
-  query,
+  query = "",
   limit = 6,
-  page,
-  category,
+  page = 1,
+  category = "",
 }: GetAllPostParams) => {
   try {
     await connectToDatabase();
@@ -111,11 +111,11 @@ export const getAllPosts = async ({
   }
 };
 
-// read problems of a particular user
+// read posts of a particular user
 export const getAllMyPosts = async ({
   expertId,
   limit = 6,
-  page,
+  page = 1,
 }: GetMyPostParams) => {
   try {
     await connectToDatabase();
@@ -179,7 +179,7 @@ export const updatePost = async ({
   }
 };
 
-// delete problem - d
+// delete post - d
 export const deletePost = async ({
   postId,
   path,

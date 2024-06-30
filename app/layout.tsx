@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     description:
     "Join Suggest Solutions to upload problems and receive practical solutions from a helpful community. Empower yourself and others by sharing knowledge and expertise.",  
-    images: ['https://shorturl.at/5FMDj', 'https://shorturl.at/P96J0', 'https://shorturl.at/cB9Bf', 'https://shorturl.at/rVFcR'],
+    images: ['https://shorturl.at/5FMDj', 'https://shorturl.at/P96J0', 'https://shorturl.at/cB9Bf', 'https://shorturl.at/rVFcR', 'https://utfs.io/f/409a78bd-af17-4c58-b2bb-93543218f5fd-t4bwmb.jpeg', 'https://utfs.io/f/db295597-f78c-4beb-a96c-5e74ef125ce5-t3s40y.jpeg', 'https://utfs.io/f/5e9689c8-ccb0-4e43-b21f-e37557c17abd-gqyb8g.20.33.jpeg', 'https://utfs.io/f/ea8a50f1-e0a2-44be-bc0c-b729224ef6ac-gqyb8g.20.32.jpeg'],
   },
   keywords: [
     "problem solving",

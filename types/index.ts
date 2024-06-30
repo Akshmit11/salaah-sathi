@@ -280,11 +280,11 @@ export type DeletePostParams = {
 // get all posts
 export type GetMyPostParams = {
   expertId: string;
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
 };
 
-// get all problems
+// get all post
 export type GetAllPostParams = {
   query: string;
   category: string;
@@ -320,4 +320,18 @@ export type FetchTrendingProblemParams = {
   category: string;
   limit: number;
   page: number;
+};
+
+
+// fetch all post
+export type FetchAllPostParams = {
+  query?: string;
+  category?: string;
+  limit?: number;
+  page?: number;
+};
+
+// fetch all posts
+export type FetchMyPostParams = {
+  expertId: string;
 };

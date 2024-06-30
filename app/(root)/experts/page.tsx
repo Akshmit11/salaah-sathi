@@ -2,6 +2,7 @@ import CategoryFilter from "@/components/shared/CategoryFilter";
 import PostCollection from "@/components/shared/PostCollection";
 import SearchComponent from "@/components/shared/SearchComponent";
 import { Button } from "@/components/ui/button";
+import { fetchAllPosts } from "@/lib/actions/infiniteScroll.actions";
 import { getAllPosts } from "@/lib/actions/post.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
@@ -17,17 +18,9 @@ const Experts = async ({ searchParams }: SearchParamProps) => {
   const user = await getUserById(userId);
   if (!user) redirect("/sign-in");
 
-  const page = Number(searchParams?.page) || 1;
   const searchText = (searchParams?.query as string) || "";
   const category = (searchParams?.category as string) || "";
-  const posts = await getAllPosts({
-    query: searchText,
-    category,
-    page,
-    limit: 6,
-  });
-
-
+  const data = await fetchAllPosts({ query: searchText, category });
 
   const plan = user?.plan;
   const isExpert = user?.isExpert;
@@ -76,12 +69,11 @@ const Experts = async ({ searchParams }: SearchParamProps) => {
         <CategoryFilter type="expert" />
       </div>
       <PostCollection
-        data={posts?.data}
+        initialData={data}
         emptyTitle={"No Posts uploaded by the experts"}
         emptySubtitle={"Coming Soon"}
-        limit={6}
-        page={page}
-        totalPages={posts?.totalPages}
+        searchText={searchText}
+        category={category}
         postCollectionType={"All_Post"}
       />
     </div>

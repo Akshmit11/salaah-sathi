@@ -1,8 +1,9 @@
 "use server";
 
-import { FetchAllMyProblemParams, FetchAllProblemParams } from "@/types";
+import { FetchAllMyProblemParams, FetchAllPostParams, FetchAllProblemParams, FetchMyPostParams } from "@/types";
 import { handleError } from "../utils";
 import { getAllMyProblems, getAllProblems, getAllSavedProblems, getAllTrendingProblems } from "./problem.actions";
+import { getAllMyPosts, getAllPosts } from "./post.actions";
 
 // get all problems
 export const fetchAllProblem = async ({
@@ -52,6 +53,37 @@ export const fetchAllSavedProblem = async ({userId}: {userId: string}) => {
     const problems = await getAllSavedProblems({ userId });
 
     return problems?.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// get all post - r
+export const fetchAllPosts = async ({
+  query = "",
+  limit = 6,
+  page = 1,
+  category = "",
+}: FetchAllPostParams) => {
+  try {
+    const posts = await getAllPosts({ query, limit, page, category });
+
+    return posts?.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+// read posts of a particular user
+export const fetchAllMyPosts = async ({
+  expertId,
+}: FetchMyPostParams) => {
+  try {
+
+    const posts = await getAllMyPosts({ expertId });
+
+    return posts?.data;
+
   } catch (error) {
     handleError(error);
   }
