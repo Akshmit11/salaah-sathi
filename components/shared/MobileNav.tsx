@@ -30,7 +30,7 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col gap-6 bg-white lg:hidden">
           <Link href={'/'} onClick={() => {setOpenSheet(false)}}> 
-          <Image src={`https://utfs.io/f/f2ce5085-9339-47da-a5c7-5ce33138a86e-1xcy8.webp`} alt="logo" width={1000} height={1000} className='w-52 h-24 object-contain object-center' priority />
+          <Image src={`/img3.webp`} alt="logo" width={1000} height={1000} className='w-52 h-24 object-contain object-center' priority />
           </Link>
           <Separator className="border border-gray-50" />
           <ul className="space-y-4">

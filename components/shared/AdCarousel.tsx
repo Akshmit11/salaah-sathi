@@ -7,14 +7,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { adCarouselImageUrls } from "@/constants";
+import { adCarouselImagePublicUrls, adCarouselImageUrls } from "@/constants";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 
 const AdCarousel = () => {
   return (
     <Carousel
-      className="w-full rounded-lg min-w-[200px]"
+      className="w-full rounded-lg min-w-[200px] max-h-fit lg:max-h-[220px]"
       plugins={[
         Autoplay({
           delay: 3000,
@@ -23,10 +23,10 @@ const AdCarousel = () => {
       ]}
     >
       <CarouselContent>
-        {adCarouselImageUrls.map((url, index) => (
+        {adCarouselImagePublicUrls.map((url, index) => (
           <CarouselItem key={index} className="rounded-lg">
             <Image
-              src={url}
+              src={`/images/carousel-${url}.jpeg`}
               alt={`hero-${index}`}
               width={1000}
               height={1000}

@@ -101,3 +101,10 @@ export const adCarouselImageUrls = [
   "https://utfs.io/f/5e9689c8-ccb0-4e43-b21f-e37557c17abd-gqyb8g.20.33.jpeg",
   "https://utfs.io/f/ea8a50f1-e0a2-44be-bc0c-b729224ef6ac-gqyb8g.20.32.jpeg"
 ]
+
+export const adCarouselImagePublicUrls = [
+  "1",
+  "2",
+  "3",
+  "4"
+]
