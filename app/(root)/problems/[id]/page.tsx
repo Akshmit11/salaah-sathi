@@ -88,6 +88,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
                 {problem.comments.map((comment: any) => {
                   // Format the date as desired
                   const createdAt = new Date(comment?.createdAt);
+                  
                   const formattedDate = createdAt.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -109,7 +110,7 @@ const ProblemId = async ({ params: { id } }: SearchParamProps) => {
                                 {comment?.expert?.fullName}
                               </Link>{" "}
                               <span>
-                                <BadgeCheck className="bg-primary" />
+                                <BadgeCheck className="text-primary" />
                               </span>
                             </div>
                           ) : (

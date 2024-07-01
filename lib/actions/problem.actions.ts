@@ -32,6 +32,11 @@ const populateProblem = async (query: any) => {
       model: User,
       select: "_id username",
     },
+    {
+      path: "comments.expert",
+      model: User,
+      select: "_id fullName",
+    },
   ]);
 };
 
