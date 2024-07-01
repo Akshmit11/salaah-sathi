@@ -1,6 +1,7 @@
 import PostCollection from "@/components/shared/PostCollection";
 import { Button } from "@/components/ui/button";
 import { getExpertByUserId } from "@/lib/actions/experts.actions";
+import { fetchAllMyPosts } from "@/lib/actions/infiniteScroll.actions";
 import { getAllMyPosts } from "@/lib/actions/post.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { SearchParamProps } from "@/types";
@@ -36,11 +37,7 @@ const ExpertDashboard = async ({ searchParams }: SearchParamProps) => {
 
   
   const page = Number(searchParams?.page) || 1;
-  const posts = await getAllMyPosts({
-    expertId: expert._id,
-    page,
-    limit: 6,
-  });
+  const data = await fetchAllMyPosts({ expertId: expert._id });
 
   return (
     <>
@@ -70,12 +67,9 @@ const ExpertDashboard = async ({ searchParams }: SearchParamProps) => {
       <section className="w-full flex flex-col mt-8">
         <h1 className="text-lg font-light">Your Previous Posts</h1>
         <PostCollection
-          data={posts?.data}
+          initialData={data}
           emptyTitle={"You have uploaded no posts"}
           emptySubtitle={"Upload to reach your audience"}
-          limit={6}
-          page={page}
-          totalPages={posts?.totalPages}
           postCollectionType={"My_Editable_Post"}
         />
       </section>
