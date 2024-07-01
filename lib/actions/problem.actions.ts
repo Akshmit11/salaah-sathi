@@ -33,7 +33,7 @@ const populateProblem = async (query: any) => {
       select: "_id username",
     },
     {
-      path: "comments.expert",
+      path: "comments.experts",
       model: User,
       select: "_id fullName",
     },
