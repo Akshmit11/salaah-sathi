@@ -17,6 +17,7 @@ import Problem from "../database/models/problem.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import Expert from '../database/models/expert.model';
 
 
 
@@ -33,8 +34,8 @@ const populateProblem = async (query: any) => {
       select: "_id username",
     },
     {
-      path: "comments.experts",
-      model: User,
+      path: "comments.expert",
+      model: Expert,
       select: "_id fullName",
     },
   ]);
