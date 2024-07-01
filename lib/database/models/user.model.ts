@@ -11,6 +11,7 @@ export interface IUser extends Document {
   photo: string;
   total_problems: number;
   total_comments: number;
+  wallet: number;
   saveProblems: IProblem[];
   isExpert: boolean;
   plan: "free" | "pro";
@@ -29,6 +30,7 @@ const UserSchema: Schema<IUser> = new Schema({
   plan: { type: String, default: "free" },
   total_problems: { type: Number, default: 0 },
   total_comments: { type: Number, default: 0 },
+  wallet: { type: Number, default: 0 },
   saveProblems: [{ type: Schema.Types.ObjectId, ref: "Problem", default: [] }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

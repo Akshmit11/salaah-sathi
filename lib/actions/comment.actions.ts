@@ -6,8 +6,7 @@ import Problem from "../database/models/problem.model";
 import User from "../database/models/user.model";
 import { handleError } from "../utils";
 import Expert from "../database/models/expert.model";
-
-
+import Lottery from "../database/models/lottery.model";
 
 // create comment - c
 export const createComment = async ({
@@ -55,9 +54,38 @@ export const createComment = async ({
     const update: any = {
       $push: { comments: newComment },
     };
-
+    
+    // adding lottery logic
     if (user.isExpert) {
       update.$inc = { expertComments: 1 };
+      
+      // Lottery logic
+      const currentDate = new Date();
+      const problemCreationDate = new Date(problem.createdAt);
+
+      // Check if the problem was created today
+      const isToday = currentDate.toDateString() === problemCreationDate.toDateString();
+
+      // Update the lottery if the problem was created today and the comment is from an expert
+      if (isToday) {
+        const lottery = await Lottery.findOne({ date: currentDate.toDateString() });
+        if (lottery) {
+          // Add user to eligible users if not already added
+          if (!lottery.eligibleUsers.includes(problem.user._id)) {
+            lottery.eligibleUsers.push(problem.user._id);
+          }
+          lottery.todayPrizeMoney += 1; // Increment the prize money
+        } else {
+          // Create a new lottery document if it doesn't exist for today
+          await Lottery.create({
+            date: currentDate.toDateString(),
+            eligibleUsers: [problem.user._id],
+            todayPrizeMoney: 1,
+            totalPrizeDistributed: 0,
+            pastWinners: []
+          });
+        }
+      }
     }
 
     // Add the new comment to the problem's comments array
